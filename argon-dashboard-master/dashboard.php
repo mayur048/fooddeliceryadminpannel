@@ -1,3 +1,30 @@
+<?php 
+  if (isset($_POST['Email'])) {
+    include 'config.php';
+    $adminEmail = $_POST['Email'];
+    echo $adminEmail;
+    $adminPassword = $_POST['Password'];
+    echo $adminPassword;
+    $dbQuery = mysqli_query($db,"SELECT * FROM `login` WHERE `email` = '$adminEmail'");
+    $dbResult = "";
+    $count = mysqli_num_rows($dbQuery);
+    if ($count == 0) {
+      $messages = "No account Exists with this Email!! ".$count ." -----------";
+      // echo "$adminPassword + $adminPassword ";
+      echo "<script type='text/javascript'>alert('$messages');window.location.replace('index.php);</script>";
+    } else {
+      $dbResult = mysqli_fetch_assoc($dbQuery);
+      if ($adminPassword == $dbResult['password']) {
+        $messages = "Wrong Email or Password!! Try login!! ".mysqli_num_rows($dbQuery);
+        echo $messages;
+        // echo "<script type='text/javascript'>alert('$messages');window.location.replace('dashboard.php');</script>";
+      }
+    }
+  } else {
+    $messages = "Sign in, to get access!!";
+    echo "<script type='text/javascript'>alert('$messages');window.location.replace('index.php');</script>";  
+  }
+?>
 <!DOCTYPE html>
 <html>
 
