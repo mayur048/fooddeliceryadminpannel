@@ -152,13 +152,13 @@
               <div class="text-center text-muted mb-4">
                 <small>Sign in with credentials</small>
               </div>
-              <form role="form">
+              <form role = "form" action = 'dashboard.php' method = 'post' >
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email">
+                    <input class="form-control" placeholder="Email"  name = 'Email' type="email">
                   </div>
                 </div>
                 <div class="form-group">
@@ -166,7 +166,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password">
+                    <input class="form-control" placeholder="Password" name = 'Password' type="password">
                   </div>
                 </div>
                 <!-- <div class="custom-control custom-control-alternative custom-checkbox">
@@ -176,7 +176,7 @@
                   </label>
                 </div> -->
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary my-4">Sign in</button>
+                  <button type="submit" name = "submit" class="btn btn-primary my-4">Sign in</button>
                 </div>
               </form>
             </div>
