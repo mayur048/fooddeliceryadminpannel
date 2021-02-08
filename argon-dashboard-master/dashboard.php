@@ -5,10 +5,9 @@
     $adminPassword = $_POST['Password'];
     $dbQuery = mysqli_query($db,"SELECT * FROM `login` WHERE `email` = '$adminEmail'");
     $dbResult = "";
-    $count = mysqli_num_rows($dbQuery);
-    if ($count == 0) {
+    if (mysqli_num_rows($dbQuery) == 0) {
       $messages = "No account Exists with this Email!! ";
-      echo "<script type='text/javascript'>alert('$messages');window.location.replace('index.php);</script>";
+      echo "<script type='text/javascript'>alert('$messages');window.location.replace('index.php');</script>";
     } else {
       $dbResult = mysqli_fetch_assoc($dbQuery);
       // print_r($dbResult);
@@ -379,7 +378,7 @@
                   <span>Support</span>
                 </a> -->
                 <div class="dropdown-divider"></div>
-                <a href="#!" class="dropdown-item">
+                <a href="index.php" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
                   <span>Logout</span>
                 </a>
