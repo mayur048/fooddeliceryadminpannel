@@ -16,6 +16,24 @@
   <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
+
+  <script type="text/javascript">
+    function validation(){
+      var username = document.forms["login"]["Email"];
+      var password = document.forms["login"]["Password"];
+
+      if(username == ""){
+          alert("Enter Username");
+          return false;
+        }
+        if(password == ""){
+          alert("Enter Password");
+          return false;
+        }
+        return true;
+    }
+
+  </script>
 </head>
 
 <body class="bg-default">
@@ -141,13 +159,13 @@
               <div class="text-center text-muted mb-4">
                 <small>Sign in with credentials</small>
               </div>
-              <form role = "form" action = 'dashboard.php' method = 'post' >
+              <form role = "form" action="dashboard.php" method = 'post' name="login">
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email"  name = 'Email' type="email">
+                    <input class="form-control" placeholder="Email" name='Email' type="email" required="">
                   </div>
                 </div>
                 <div class="form-group">
@@ -155,7 +173,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" name = 'Password' type="password">
+                    <input class="form-control" placeholder="Password" name='Password' type="password" required="">
                   </div>
                 </div>
                 <!-- <div class="custom-control custom-control-alternative custom-checkbox">
@@ -165,7 +183,7 @@
                   </label>
                 </div> -->
                 <div class="text-center">
-                  <button type="submit" name = "submit" class="btn btn-primary my-4">Sign in</button>
+                  <input type="submit" name = "submit" class="btn btn-primary my-4" onclick="return validate()" value="Sign in">
                 </div>
               </form>
             </div>
@@ -210,6 +228,10 @@
       </div>
     </div>
   </footer>
+
+  
+
+
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
