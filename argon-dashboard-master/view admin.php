@@ -567,7 +567,7 @@
                         <th>Salary</th>
                     </tr>
                 </tfoot>
-            </table>
+              </table>
             </div>
             <!-- Card footer -->
             <!-- <div class="card-footer py-4">

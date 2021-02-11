@@ -381,8 +381,8 @@
               </nav> -->
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">Add Items</a>
-             <!--  <a href="#" class="btn btn-sm btn-neutral">Filters</a> -->
+              <a href="add product.php" class="btn btn-sm btn-neutral">Add Items</a>
+              <a href="add category.php" class="btn btn-sm btn-neutral">Add Category</a>
             </div>
           </div>
         </div>
