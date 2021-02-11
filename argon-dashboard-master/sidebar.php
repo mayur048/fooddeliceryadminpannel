@@ -12,7 +12,7 @@
         <!-- Nav items -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="dashboard.php">
+            <a class="nav-link" href="dashboard.php">
               <i class="ni ni-tv-2 text-primary"></i>
               <span class="nav-link-text">Dashboard</span>
             </a>
@@ -20,7 +20,7 @@
           <li class="nav-item">
             <a class="nav-link" href="view admin.php">
               <i class="fas fa-plus"></i>
-              <span class="nav-link-text">Add Items</span>
+              <span class="nav-link-text">View Admin</span>
             </a>
           </li>
           <li class="nav-item">
