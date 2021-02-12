@@ -6,7 +6,6 @@
     $dbQuery = mysqli_query($db,"SELECT * FROM `login` WHERE `email` = '$adminEmail'");
     $dbResult = "";
     if (mysqli_num_rows($dbQuery) == 0) {
-      
       echo "<script>alert('No account Exists with this Email!'); window.location.replace('index.php'); </script>";
     } else {
       $dbResult = mysqli_fetch_assoc($dbQuery);
@@ -17,7 +16,6 @@
           session_start();
           $_SESSION['Email'] = $adminEmail;
           $_SESSION['Role'] = $dbResult['roleId'];
-          
           echo '<script>alert("Welcome !!");window.location.replace("dashboard.php");</script>';
         } else {
           echo '<script>alert("You access has been Revoked!!");window.location.replace("dashboard.php");</script>';
