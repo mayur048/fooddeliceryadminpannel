@@ -104,7 +104,7 @@
                   </label>
                 </div> -->
                 <div class="text-center">
-                  <input type="submit" name = "submit" class="btn btn-primary my-4" onclick="return validate()" value="Sign in">
+                  <input type="submit" name = "submit" class="btn btn-primary my-4" onclick="return validation()" value="Sign in">
                 </div>
               </form>
             </div>
