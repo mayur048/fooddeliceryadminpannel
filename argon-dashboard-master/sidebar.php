@@ -1,3 +1,18 @@
+<?php 
+  include 'config.php';
+  $roleId = $_SESSION['Role'];
+  $dbQuery =  mysqli_query($db,"SELECT * FROM `role` WHERE `RoleId` = $roleId");
+  $dbResult = "";
+  if (mysqli_num_rows($dbQuery) == 0) {
+    $row = mysqli_num_rows($dbQuery);
+    echo "<script>alert('$row');</script>";
+    echo "<script>alert('NO ROLE HAS BEEN ASSIGNED TO YOU');</script>";
+  } else {
+    $dbResult = mysqli_fetch_assoc($dbQuery);
+    $roleName = $dbResult['RoleName'];
+    // echo "<script>alert('$message');</script>";
+  }
+?>
 <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
   <div class="scrollbar-inner">
     <!-- Brand -->
@@ -17,18 +32,21 @@
               <span class="nav-link-text">Dashboard</span>
             </a>
           </li>
+          <?php if ($dbResult['RoleName'] == 'super Admin') { ?> 
           <li class="nav-item">
             <a class="nav-link" href="view admin.php">
               <i class="fas fa-plus"></i>
               <span class="nav-link-text">View Admin</span>
             </a>
           </li>
+          <?php } else if ($dbResult['RoleName'] == 'admin') { ?>
           <li class="nav-item">
             <a class="nav-link" href="view items.php">
               <i class="fas fa-eye"></i>
               <span class="nav-link-text">View Items</span>
             </a>
           </li>
+          <?php } ?>
         </ul>
       </div>
     </div>
