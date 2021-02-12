@@ -1,3 +1,6 @@
+<?php 
+  session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -25,8 +28,7 @@
   <?php include("sidebar.php"); ?>
   <!-- Main content -->
   <div class="main-content" id="panel">
-    <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+  <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         
@@ -56,7 +58,7 @@
                     <!-- <img alt="Image placeholder" src="assets/img/theme/team-4.jpg"> -->
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                    <span class="mb-0 text-sm  font-weight-bold"><?php echo $_SESSION['Email'];?></span>
                   </div>
                 </div>
               </a>
@@ -65,7 +67,7 @@
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
                 <div class="dropdown-divider"></div>
-                <a href="index.php" class="dropdown-item">
+                <a href="logout.php" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
                   <span>Logout</span>
                 </a>

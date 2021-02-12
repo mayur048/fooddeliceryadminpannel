@@ -1,33 +1,3 @@
-<?php 
-  include 'config.php';
-  if (isset($_POST['submit'])) {
-    $adminEmail = $_POST['Email'];
-    $adminPassword = $_POST['Password'];
-    $dbQuery = mysqli_query($db,"SELECT * FROM `login` WHERE `email` = '$adminEmail'");
-    $dbResult = "";
-    if (mysqli_num_rows($dbQuery) == 0) {
-      $messages = "No account Exists with this Email!! ";
-      echo "<script type='text/javascript'>alert('$messages');window.location.replace('index.php');</script>";
-    } else {
-      $dbResult = mysqli_fetch_assoc($dbQuery);
-      if ($adminPassword != $dbResult['password']) {
-        $messages = "Wrong Email or Password!! Try login!! ";
-        echo "<script type='text/javascript'>alert('$messages');window.location.replace('index.php');</script>";
-      } else {
-        if (dbResult['isActive'] == 1) {
-          session_start();
-          $_SESSION['Email'] = $adminEmail;
-          $_SESSION['Role'] = $dbResult['roleId'];
-          $messages = "Welcome!! ";
-          echo "<script type='text/javascript'>alert('$messages');window.location.replace('dashboard.php');</script>";
-        } else {
-          $messages = "You access has been Revoked!! ";
-          echo "<script type='text/javascript'>alert('$messages');window.location.replace('dashboard.php');</script>";
-        }
-      }
-    }
-  }
-?>
 <!DOCTYPE html>
 <html>
 
@@ -110,7 +80,7 @@
               <div class="text-center text-muted mb-4">
                 <small>Sign in with credentials</small>
               </div>
-              <form role = "form" action="dashboard.php" method = 'post' name="login">
+              <form role = "form" action="login.php" method = 'post' name="login">
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
