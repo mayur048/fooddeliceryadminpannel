@@ -29,11 +29,7 @@
 
 <body>
   <!-- Sidenav -->
-<<<<<<< Updated upstream
 <?php include 'sidebar.php'?>
-=======
-  <?php include("sidebar.php");?>
->>>>>>> Stashed changes
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
