@@ -32,7 +32,10 @@
 
 <body>
   <!-- Sidenav -->
-  <?php include("sidebar.php") ?>
+  <?php 
+    include("sidebar.php");
+    $shopId = $_GET['id']; 
+  ?>
   <!-- Main content -->
   <div class="main-content" id="panel">
   <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
@@ -117,7 +120,7 @@
               <h3 class="mb-0">Add Product</h3>
             </div>
 
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
               <div class="row" style="padding: 2%"> 
 
                 <div class="col-md-6">

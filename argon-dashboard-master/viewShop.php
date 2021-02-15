@@ -1,6 +1,6 @@
 <?php 
 include 'config.php';
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,7 +29,6 @@ include 'config.php';
   <?php 
     include("sidebar.php");
     include("header.php"); 
-    $shopId = $_GET['id'];
   ?>
   <!-- Main content -->
   <div class="main-content" id="panel">
@@ -38,11 +37,11 @@ include 'config.php';
         <div class="header-body">
           <div class="row align-items-center py-4">
             <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">View Items</h6>
+              <h6 class="h2 text-white d-inline-block mb-0">View Shop</h6>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="add product.php?id=<?php echo $shopId;?>" class="btn btn-sm btn-neutral">Add Product</a>
-              <a href="add category.php" class="btn btn-sm btn-neutral">Add Product Category</a>
+              <a href="add product.php" class="btn btn-sm btn-neutral">Add Shop</a>
+              <!-- <a href="add category.php" class="btn btn-sm btn-neutral">Add Product Category</a> -->
             </div>
           </div>
         </div>
@@ -58,56 +57,41 @@ include 'config.php';
               <h3 class="mb-0">Light table</h3>
             </div>
             <!-- Light table -->
+           
             <div class="table-responsive">
               <table id="mytable" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Sr.NO</th>
+                        <th>Sr.No</th>
                         <th>Name</th>
-                        <th>Description</th>
-                        <th>Summary</th>
-                        <th>Price</th>
-                        <th>Discount Price</th>
-                        <th>Category</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                
-                <tbody>
+                <tbody> 
                 <?php 
-                   
-                    $dbQuery = mysqli_query($db,"SELECT `product`.`productName`,`product`.`ProductDesc`,`product`.`ProductSummary`,`product`.`Price`,`product`.`DiscountPrice`,`product`.`ProductCategoryId`,`productcategory`.`Name` FROM `product` LEFT JOIN `productcategory` ON `productcategory`.`ProductCategoryID`=`product`.`ProductCategoryId` WHERE `product`.`shopId` = 1 AND `productcategory`.`shopId` = 1");
-                    $count = 1;
-                    if (mysqli_num_rows($dbQuery) == 0) {
-                      echo "<script>alert('No Shope');  </script>";
-                    } else {
-                      while ($row = mysqli_fetch_array($dbQuery)) {
-                ?>
+                 $id = $_SESSION['ID'];
+                 $dbQuery = mysqli_query($db,"SELECT * FROM `shop` WHERE `userId` = $id");
+                $count = 1;
+             if (mysqli_num_rows($dbQuery) == 0) {
+                 echo "<script>alert('No Shope');  </script>";
+             } else {
+                 while ($row = mysqli_fetch_array($dbQuery)) {
+            ?>
                     <tr>
-                    <td><?php echo $count; ?></td>
-                        <td><?php echo $row['productName'];?></td>
-                        <td><?php echo $row['ProductDesc'];?></td>
-                        <td><?php echo $row['ProductSummary'];?></td>
-                        <td><?php echo $row['Price'];?></td>
-                        <td><?php echo $row['DiscountPrice'];?></td>
-                        <td><?php echo $row['Name'];?></td>
-                        <td>Edit</td>
+                        <td><?php echo $count;?></td>
+                        <td><?php echo $row['ShopeName'];?></td>
+                        <td><a href= "view%20items.php?id=<?php echo $row['ShopId']?>">View Product</td>
                     </tr>
-                    <?php 
-                    $count++;
-                      }
-                    }
-                    ?>
+                <?php
+                $count++; 
+            }
+        }
+            ?>
                 </tbody>
                 <tfoot>
-                    <tr>
-                    <th>Sr.NO</th>
+                <tr>
+                        <th>Sr.No</th>
                         <th>Name</th>
-                        <th>Description</th>
-                        <th>Summary</th>
-                        <th>Price</th>
-                        <th>Discount Price</th>
-                        <th>Category</th>
                         <th>Actions</th>
                     </tr>
                 </tfoot>
@@ -116,57 +100,6 @@ include 'config.php';
           </div>
         </div>
       </div>
-      <!-- Dark table -->
-      <!-- <div class="row">
-        <div class="col">
-          <div class="card bg-default shadow">
-            <div class="card-header bg-transparent border-0">
-              <h3 class="text-white mb-0">Dark table</h3>
-            </div>
-            <div class="table-responsive">
-              <table id="mytable" class="table align-items-center table-flush">
-                  <tr class="header">
-                    <th style="width:60%;">Name</th>
-                    <th style="width:40%;">Country</th>
-                  </tr>
-                  <tr>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Germany</td>
-                  </tr>
-                  <tr>
-                    <td>Berglunds snabbkop</td>
-                    <td>Sweden</td>
-                  </tr>
-                  <tr>
-                    <td>Island Trading</td>
-                    <td>UK</td>
-                  </tr>
-                  <tr>
-                    <td>Koniglich Essen</td>
-                    <td>Germany</td>
-                  </tr>
-                  <tr>
-                    <td>Laughing Bacchus Winecellars</td>
-                    <td>Canada</td>
-                  </tr>
-                  <tr>
-                    <td>Magazzini Alimentari Riuniti</td>
-                    <td>Italy</td>
-                  </tr>
-                  <tr>
-                    <td>North/South</td>
-                    <td>UK</td>
-                  </tr>
-                  <tr>
-                    <td>Paris specialites</td>
-                    <td>France</td>
-                  </tr>
-                </table>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- Footer -->
       <?php include("footer.php"); ?>
     </div>
   </div>
