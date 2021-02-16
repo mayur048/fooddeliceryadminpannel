@@ -34,7 +34,12 @@
   <!-- Sidenav -->
   <?php 
     include("sidebar.php");
+    include("config.php");
     $shopId = $_GET['id']; 
+    $dbQuery = mysqli_query($db,"SELECT * FROM `productcategory` WHERE `shopId` = $shopId");
+    if (mysqli_num_rows($dbQuery) == 0) {
+      echo "<script>alert('FYI:- No Product Category Available, Please Create One!!');window.location.replace('add category.php?id=$shopId');</script>";
+    } else {
   ?>
   <!-- Main content -->
   <div class="main-content" id="panel">
@@ -126,14 +131,14 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <div class="input-group">
-                      <input type="text" class="form-control form-control-muted" placeholder="Product Name">
+                      <input type="text" class="form-control form-control-muted" name = "productName" placeholder="Product Name">
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <div class="input-group">
-                      <input type="text" class="form-control form-control-muted" placeholder="Product Description">
+                      <input type="text" class="form-control form-control-muted" name = "productDesc" placeholder="Product Description">
                     </div>
                   </div>
                 </div>
@@ -141,14 +146,14 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <div class="input-group">
-                      <textarea class="form-control form-control-muted" placeholder="Product Summary" rows="3"></textarea> 
+                      <textarea class="form-control form-control-muted" name = "productSummary" placeholder="Product Summary" rows="3"></textarea> 
                     </div>
                   </div>
                 </div>
 
                 <div class="col-md-6 ">
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFileLang" placeholder="Product Image">
+                    <input type="file" class="custom-file-input" id="customFileLang" name = "productImg" placeholder="Product Image">
                     <label class="custom-file-label form-control-muted" for="customFileLang">Select file</label>
                   </div>  
                 </div>
@@ -156,9 +161,10 @@
                   <div class="form-group">
                     <div class="input-group">
                       <select class="form-control form-control-muted">
-                        <option value="">----select----</option>
-                        <option value="1">Category 1</option>
-                        <option value="2">Category 2</option>
+                      <?php 
+                        while ($rows = mysqli_fetch_array($dbQuery)) {?>
+                          <option value="<?php echo $rows['ProductCategoryID']; ?>"><?php echo $rows['Name']; ?></option>
+                      <?php }} ?>
                       </select>
                     </div>
                   </div>
