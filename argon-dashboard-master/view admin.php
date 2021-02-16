@@ -25,13 +25,13 @@
   <!-- Sidenav -->
   <?php 
     include("sidebar.php");
-    include("header.php");
    ?>
   <!-- Main content -->
 
     <!-- Header -->
     <!-- Header -->
     <div class="header bg-primary pb-6">
+      <?php include("header.php");?>
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">

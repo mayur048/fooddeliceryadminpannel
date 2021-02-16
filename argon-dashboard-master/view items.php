@@ -27,12 +27,12 @@ include 'config.php';
 <body>
   <!-- Sidenav -->
   <?php 
-    include("sidebar.php");
-    include("header.php"); 
+    include("sidebar.php"); 
     $shopId = $_GET['id'];
   ?>
   <!-- Main content -->
   <div class="main-content" id="panel">
+    <?php include("header.php");?>
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
         <div class="header-body">
@@ -48,6 +48,7 @@ include 'config.php';
         </div>
       </div>
     </div>
+
     <!-- Page content -->
     <div class="container-fluid mt--6">
       <div class="row">
@@ -111,61 +112,12 @@ include 'config.php';
                         <th>Actions</th>
                     </tr>
                 </tfoot>
-            </table>
+              </table>
             </div>
           </div>
         </div>
       </div>
-      <!-- Dark table -->
-      <!-- <div class="row">
-        <div class="col">
-          <div class="card bg-default shadow">
-            <div class="card-header bg-transparent border-0">
-              <h3 class="text-white mb-0">Dark table</h3>
-            </div>
-            <div class="table-responsive">
-              <table id="mytable" class="table align-items-center table-flush">
-                  <tr class="header">
-                    <th style="width:60%;">Name</th>
-                    <th style="width:40%;">Country</th>
-                  </tr>
-                  <tr>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Germany</td>
-                  </tr>
-                  <tr>
-                    <td>Berglunds snabbkop</td>
-                    <td>Sweden</td>
-                  </tr>
-                  <tr>
-                    <td>Island Trading</td>
-                    <td>UK</td>
-                  </tr>
-                  <tr>
-                    <td>Koniglich Essen</td>
-                    <td>Germany</td>
-                  </tr>
-                  <tr>
-                    <td>Laughing Bacchus Winecellars</td>
-                    <td>Canada</td>
-                  </tr>
-                  <tr>
-                    <td>Magazzini Alimentari Riuniti</td>
-                    <td>Italy</td>
-                  </tr>
-                  <tr>
-                    <td>North/South</td>
-                    <td>UK</td>
-                  </tr>
-                  <tr>
-                    <td>Paris specialites</td>
-                    <td>France</td>
-                  </tr>
-                </table>
-            </div>
-          </div>
-        </div>
-      </div> -->
+      
       <!-- Footer -->
       <?php include("footer.php"); ?>
     </div>

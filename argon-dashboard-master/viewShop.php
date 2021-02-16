@@ -27,11 +27,12 @@ session_start();
 <body>
   <!-- Sidenav -->
   <?php 
-    include("sidebar.php");
-    include("header.php"); 
+    include("sidebar.php"); 
   ?>
+
   <!-- Main content -->
   <div class="main-content" id="panel">
+    <?php include("header.php");?>
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
         <div class="header-body">
@@ -127,10 +128,6 @@ session_start();
         }        
       }
     }
-
-    $(document).ready(function() {
-        $('#mytable').DataTable();
-    } );
   </script>
 
   <!-- Argon Scripts -->

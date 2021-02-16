@@ -1,5 +1,4 @@
-    <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+<nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
@@ -13,7 +12,7 @@
               </div>
             </div>
             <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-              <span aria-hidden="false">×</span>
+              <span aria-hidden="true">×</span>
             </button>
           </form>
           <!-- Navbar links -->
@@ -33,12 +32,13 @@
                 <i class="ni ni-zoom-split-in"></i>
               </a>
             </li>
+          </ul>
           <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
             <li class="nav-item dropdown">
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <!-- <img alt="Image placeholder" src="assets/img/theme/team-4.jpg"> -->
+                    <img src="">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold"><?php echo $_SESSION['Email'];?></span>
@@ -60,3 +60,4 @@
         </div>
       </div>
     </nav>
+  
