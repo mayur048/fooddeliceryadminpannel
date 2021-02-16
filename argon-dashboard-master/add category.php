@@ -1,10 +1,23 @@
 <?php 
   session_start();
+  include("config.php");
   if(!isset($_SESSION["Email"])) {
     header("location: index.php");
   }
   $shopId = $_GET['id'];
-  // if () {}
+  
+  if (isset($_POST['submit'])) {
+    $productCategory = $_POST['C_Name'];
+    $dbQuery = "INSERT INTO `productcategory`( `Name`, `shopId`) VALUES ('$productCategory',$shopId)";
+    if (mysqli_query($db,$dbQuery)) {
+      echo '<script>alert(" New Category Add Successfully");</script>';
+    }else{
+      echo '<script>alert("Something Went Wrong!!");</script>';
+      // echo "ERROR: Could not able to execute $dbQuery. " . mysqli_error($db);
+    }
+  } else {
+    echo '<script>alert("Something Went Wrong!!");</script>';
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -117,7 +130,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <div class="input-group">
-                      <input type="submit" class="btn btn-primary" value="Submit">
+                      <input type="submit" class="btn btn-primary" name = "submit" value="Submit">
                     </div>
                   </div>
                 </div>
