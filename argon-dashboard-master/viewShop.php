@@ -74,12 +74,16 @@ if(!isset($_SESSION["Email"])) {
                 <?php 
                  $id = $_SESSION['ID'];
                  $dbQuery = mysqli_query($db,"SELECT * FROM `shop` WHERE `userId` = $id");
-                $count = 1;
-             if (mysqli_num_rows($dbQuery) == 0) {
-                 echo "<script>alert('No Shope');  </script>";
-             } else {
-                 while ($row = mysqli_fetch_array($dbQuery)) {
-            ?>
+                 $count = 1;
+                 if (mysqli_num_rows($dbQuery) == 0) {
+                 ?>
+                    <tr>
+                      <td colspan="3" class="text-center">No Data Found</td>
+                    </tr>
+                 <?php   
+                 } else {
+                   while ($row = mysqli_fetch_array($dbQuery)) {
+                 ?>
                     <tr>
                         <td><?php echo $count;?></td>
                         <td><?php echo $row['ShopeName'];?></td>
