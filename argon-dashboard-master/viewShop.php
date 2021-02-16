@@ -40,7 +40,7 @@ session_start();
               <h6 class="h2 text-white d-inline-block mb-0">View Shop</h6>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="add product.php" class="btn btn-sm btn-neutral">Add Shop</a>
+              <a href="" class="btn btn-sm btn-neutral">Add Shop</a>
               <!-- <a href="add category.php" class="btn btn-sm btn-neutral">Add Product Category</a> -->
             </div>
           </div>

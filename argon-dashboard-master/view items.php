@@ -76,7 +76,7 @@ include 'config.php';
                 <tbody>
                 <?php 
                    
-                    $dbQuery = mysqli_query($db,"SELECT `product`.`productName`,`product`.`ProductDesc`,`product`.`ProductSummary`,`product`.`Price`,`product`.`DiscountPrice`,`product`.`ProductCategoryId`,`productcategory`.`Name` FROM `product` LEFT JOIN `productcategory` ON `productcategory`.`ProductCategoryID`=`product`.`ProductCategoryId` WHERE `product`.`shopId` = 1 AND `productcategory`.`shopId` = 1");
+                    $dbQuery = mysqli_query($db,"SELECT `product`.`productName`,`product`.`ProductDesc`,`product`.`ProductSummary`,`product`.`Price`,`product`.`DiscountPrice`,`product`.`ProductCategoryId`,`productcategory`.`Name` FROM `product` LEFT JOIN `productcategory` ON `productcategory`.`ProductCategoryID`=`product`.`ProductCategoryId` WHERE `product`.`shopId` = '$shopId' AND `productcategory`.`shopId` = '$shopId'");
                     $count = 1;
                     if (mysqli_num_rows($dbQuery) == 0) {
                       echo "<script>alert('No Shope');  </script>";
@@ -84,7 +84,7 @@ include 'config.php';
                       while ($row = mysqli_fetch_array($dbQuery)) {
                 ?>
                     <tr>
-                    <td><?php echo $count; ?></td>
+                        <td><?php echo $count; ?></td>
                         <td><?php echo $row['productName'];?></td>
                         <td><?php echo $row['ProductDesc'];?></td>
                         <td><?php echo $row['ProductSummary'];?></td>
@@ -101,7 +101,7 @@ include 'config.php';
                 </tbody>
                 <tfoot>
                     <tr>
-                    <th>Sr.NO</th>
+                        <th>Sr.NO</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Summary</th>
