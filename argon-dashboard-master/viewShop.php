@@ -1,6 +1,9 @@
 <?php 
 include 'config.php';
 session_start();
+if(!isset($_SESSION["Email"])) {
+  header("location: index.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,11 +30,12 @@ session_start();
 <body>
   <!-- Sidenav -->
   <?php 
-    include("sidebar.php");
-    include("header.php"); 
+    include("sidebar.php"); 
   ?>
+
   <!-- Main content -->
   <div class="main-content" id="panel">
+    <?php include("header.php");?>
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
         <div class="header-body">
@@ -40,7 +44,7 @@ session_start();
               <h6 class="h2 text-white d-inline-block mb-0">View Shop</h6>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="add product.php" class="btn btn-sm btn-neutral">Add Shop</a>
+              <a href="" class="btn btn-sm btn-neutral">Add Shop</a>
               <!-- <a href="add category.php" class="btn btn-sm btn-neutral">Add Product Category</a> -->
             </div>
           </div>
@@ -71,12 +75,16 @@ session_start();
                 <?php 
                  $id = $_SESSION['ID'];
                  $dbQuery = mysqli_query($db,"SELECT * FROM `shop` WHERE `userId` = $id");
-                $count = 1;
-             if (mysqli_num_rows($dbQuery) == 0) {
-                 echo "<script>alert('No Shope');  </script>";
-             } else {
-                 while ($row = mysqli_fetch_array($dbQuery)) {
-            ?>
+                 $count = 1;
+                 if (mysqli_num_rows($dbQuery) == 0) {
+                 ?>
+                    <tr>
+                      <td colspan="3" class="text-center">No Data Found</td>
+                    </tr>
+                 <?php   
+                 } else {
+                   while ($row = mysqli_fetch_array($dbQuery)) {
+                 ?>
                     <tr>
                         <td><?php echo $count;?></td>
                         <td><?php echo $row['ShopeName'];?></td>
@@ -123,10 +131,6 @@ session_start();
         }        
       }
     }
-
-    $(document).ready(function() {
-        $('#mytable').DataTable();
-    } );
   </script>
 
   <!-- Argon Scripts -->

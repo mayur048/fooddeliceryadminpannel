@@ -41,9 +41,9 @@
           </li>
           <?php } else if ($dbResult['RoleName'] == 'admin') { ?>
           <li class="nav-item">
-            <a class="nav-link" href="view items.php">
+            <a class="nav-link" href="viewShop.php">
               <i class="fas fa-eye"></i>
-              <span class="nav-link-text">View Items</span>
+              <span class="nav-link-text">View Shope</span>
             </a>
           </li>
           <?php } ?>

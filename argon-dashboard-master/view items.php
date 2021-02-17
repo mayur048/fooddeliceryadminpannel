@@ -1,6 +1,9 @@
 <?php 
 include 'config.php';
     session_start();
+    if(!isset($_SESSION["Email"])) {
+      header("location: index.php");
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,12 +30,12 @@ include 'config.php';
 <body>
   <!-- Sidenav -->
   <?php 
-    include("sidebar.php");
-    include("header.php"); 
+    include("sidebar.php"); 
     $shopId = $_GET['id'];
   ?>
   <!-- Main content -->
   <div class="main-content" id="panel">
+    <?php include("header.php");?>
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
         <div class="header-body">
@@ -42,12 +45,13 @@ include 'config.php';
             </div>
             <div class="col-lg-6 col-5 text-right">
               <a href="add product.php?id=<?php echo $shopId;?>" class="btn btn-sm btn-neutral">Add Product</a>
-              <a href="add category.php" class="btn btn-sm btn-neutral">Add Product Category</a>
+              <a href="add category.php?id=<?php echo $shopId;?>" class="btn btn-sm btn-neutral">Add Product Category</a>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <!-- Page content -->
     <div class="container-fluid mt--6">
       <div class="row">
@@ -76,7 +80,7 @@ include 'config.php';
                 <tbody>
                 <?php 
                    
-                    $dbQuery = mysqli_query($db,"SELECT `product`.`productName`,`product`.`ProductDesc`,`product`.`ProductSummary`,`product`.`Price`,`product`.`DiscountPrice`,`product`.`ProductCategoryId`,`productcategory`.`Name` FROM `product` LEFT JOIN `productcategory` ON `productcategory`.`ProductCategoryID`=`product`.`ProductCategoryId` WHERE `product`.`shopId` = 1 AND `productcategory`.`shopId` = 1");
+                    $dbQuery = mysqli_query($db,"SELECT `product`.`productName`,`product`.`ProductDesc`,`product`.`ProductSummary`,`product`.`Price`,`product`.`DiscountPrice`,`product`.`ProductCategoryId`,`productcategory`.`Name` FROM `product` LEFT JOIN `productcategory` ON `productcategory`.`ProductCategoryID`=`product`.`ProductCategoryId` WHERE `product`.`shopId` = '$shopId' AND `productcategory`.`shopId` = '$shopId'");
                     $count = 1;
                     if (mysqli_num_rows($dbQuery) == 0) {
                       echo "<script>alert('No Shope');  </script>";
@@ -84,7 +88,7 @@ include 'config.php';
                       while ($row = mysqli_fetch_array($dbQuery)) {
                 ?>
                     <tr>
-                    <td><?php echo $count; ?></td>
+                        <td><?php echo $count; ?></td>
                         <td><?php echo $row['productName'];?></td>
                         <td><?php echo $row['ProductDesc'];?></td>
                         <td><?php echo $row['ProductSummary'];?></td>
@@ -101,7 +105,7 @@ include 'config.php';
                 </tbody>
                 <tfoot>
                     <tr>
-                    <th>Sr.NO</th>
+                        <th>Sr.NO</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Summary</th>
@@ -111,61 +115,12 @@ include 'config.php';
                         <th>Actions</th>
                     </tr>
                 </tfoot>
-            </table>
+              </table>
             </div>
           </div>
         </div>
       </div>
-      <!-- Dark table -->
-      <!-- <div class="row">
-        <div class="col">
-          <div class="card bg-default shadow">
-            <div class="card-header bg-transparent border-0">
-              <h3 class="text-white mb-0">Dark table</h3>
-            </div>
-            <div class="table-responsive">
-              <table id="mytable" class="table align-items-center table-flush">
-                  <tr class="header">
-                    <th style="width:60%;">Name</th>
-                    <th style="width:40%;">Country</th>
-                  </tr>
-                  <tr>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Germany</td>
-                  </tr>
-                  <tr>
-                    <td>Berglunds snabbkop</td>
-                    <td>Sweden</td>
-                  </tr>
-                  <tr>
-                    <td>Island Trading</td>
-                    <td>UK</td>
-                  </tr>
-                  <tr>
-                    <td>Koniglich Essen</td>
-                    <td>Germany</td>
-                  </tr>
-                  <tr>
-                    <td>Laughing Bacchus Winecellars</td>
-                    <td>Canada</td>
-                  </tr>
-                  <tr>
-                    <td>Magazzini Alimentari Riuniti</td>
-                    <td>Italy</td>
-                  </tr>
-                  <tr>
-                    <td>North/South</td>
-                    <td>UK</td>
-                  </tr>
-                  <tr>
-                    <td>Paris specialites</td>
-                    <td>France</td>
-                  </tr>
-                </table>
-            </div>
-          </div>
-        </div>
-      </div> -->
+      
       <!-- Footer -->
       <?php include("footer.php"); ?>
     </div>
