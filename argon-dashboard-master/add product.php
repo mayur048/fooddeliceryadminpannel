@@ -1,5 +1,72 @@
 <?php 
+    include("config.php");
   session_start();
+
+  if (!isset($_SESSION["Email"])) {
+    header("location: index.php");
+  }
+  $shopId = $_GET['id']; 
+  if (isset($_POST['submit'])) {
+    $productName = $_POST['productName'];
+    $productDesc = $_POST['productDesc'];
+    $productSummary = $_POST['productSummary'];
+    $selectCategory = $_POST['selectCategory'];
+    $productPrice = $_POST['productPrice'];
+    $productDiscountPrice = $_POST['productDiscountPrice'];
+
+    $productImg = $_FILES['productImg']['name'];
+    $targetDir = "files/productImg/";
+    $targetFile = $targetDir.basename($productImg);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+    
+    $check = getimagesize($_FILES['productImg']['tmp_name']);
+    if ($check !== false) {
+      $message = "File is an image - ".$check['mime'].".";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 1;
+    } else {
+      $message = "File is not an image.";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+
+    if (file_exists($targetFile)) {
+      $message = "Sorry, File already exists.";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+
+    if ($_FILES['productImg']['size'] > 500000) {
+      $message = "Sorry, your file is too large";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+      $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+
+    if ($uploadOk == 0) {
+      echo '<script>alert("Sorry, your file was not uploaded.");</script>';
+      // echo "Sorry, your file was not uploaded.";
+    // if everything is ok, try to upload file
+    } else {
+      if (move_uploaded_file($_FILES['productImg']['tmp_name'], $targetFile)) {
+        $dbQuery = "INSERT INTO `product`( `productName`, `shopId`, `ProductDesc`, `ProductSummary`, `Price`, `DiscountPrice`, `ProductCategoryId`, `productImg`) VALUES ('$productName',$shopId,'$productDesc','$productSummary',$productPrice,'$productDiscountPrice',$selectCategory,'$targetFile')";
+        if (mysqli_query($db,$dbQuery)) {
+          echo '<script>alert("The file has been uploaded.");</script>';
+        }
+        // echo "The file ". htmlspecialchars( basename( $targetFile)). " has been uploaded.";
+      } else {
+        // echo "Sorry, there was an error uploading your file.";
+        echo '<script>alert("Sorry, there was an error uploading your file.");</script>';
+      }
+    }
+
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,8 +101,7 @@
   <!-- Sidenav -->
   <?php 
     include("sidebar.php");
-    include("config.php");
-    $shopId = $_GET['id']; 
+
     $dbQuery = mysqli_query($db,"SELECT * FROM `productcategory` WHERE `shopId` = $shopId");
     if (mysqli_num_rows($dbQuery) == 0) {
       echo "<script>alert('FYI:- No Product Category Available, Please Create One!!');window.location.replace('add category.php?id=$shopId');</script>";
@@ -148,7 +214,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <div class="input-group">
-                      <select class="form-control form-control-muted">
+                      <select class="form-control form-control-muted" name = "selectCategory">
                       <?php 
                         while ($rows = mysqli_fetch_array($dbQuery)) {?>
                           <option value="<?php echo $rows['ProductCategoryID']; ?>"><?php echo $rows['Name']; ?></option>
@@ -164,7 +230,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                       </div>
-                      <input type="number" class="form-control form-control-muted" placeholder="Product Price">
+                      <input type="number" class="form-control form-control-muted" name = "productPrice" placeholder="Product Price">
                       <div class="input-group-append">
                         <span class="input-group-text">.00</span>
                       </div>
@@ -177,7 +243,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                       </div>
-                      <input type="number" class="form-control form-control-muted" placeholder="Discounted Price">
+                      <input type="number" class="form-control form-control-muted" name = "productDiscountPrice"  placeholder="Discounted Price">
                       <div class="input-group-append">
                         <span class="input-group-text">.00</span>
                       </div>
@@ -188,7 +254,7 @@
                 <div class="col-md-12 offset-md-5">
                   <div class="form-group">
                     <div class="input-group">
-                      <input type="submit" class="btn btn-primary" value="Submit">
+                      <input type="submit" class="btn btn-primary" name = "submit" value="Submit">
                     </div>
                   </div>
                 </div>
