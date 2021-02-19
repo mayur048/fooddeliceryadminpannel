@@ -106,6 +106,11 @@
                 <div class="text-center">
                   <input type="submit" name = "submit" class="btn btn-primary my-4" onclick="return validation()" value="Sign in">
                 </div>
+                <hr>
+                <div class="text-center">
+                  <medium>Don't have an account ?</medium>
+                  <medium><a href="register_1.php">Click to Regsiter</a></medium>
+                </div>
               </form>
             </div>
           </div>
