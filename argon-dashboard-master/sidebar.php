@@ -39,6 +39,12 @@
               <span class="nav-link-text">View Admin</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="approveProducts.php">
+              <i class="fas fa-check"></i>
+              <span class="nav-link-text">Approve Products</span>
+            </a>
+          </li>
           <?php } else if ($dbResult['RoleName'] == 'admin') { ?>
           <li class="nav-item">
             <a class="nav-link" href="viewShop.php">
