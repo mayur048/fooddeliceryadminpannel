@@ -185,109 +185,94 @@
                 </div>
 
                 <div class="row">
-                  <label style="padding-left: 2%;">Open on:</label>
-                  <div class="form-group col-md-2">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                      <input type="text" class="form-control" value="Monday" aria-label="Text input with checkbox">
-                    </div>
-                  </div>
-                  <div class="form-group col-md-2">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                      <input type="text" class="form-control" value="Tuesday" aria-label="Text input with checkbox">
-                    </div>
-                  </div>
-                  <div class="form-group col-md-2">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                      <input type="text" class="form-control" value="Wednesday" aria-label="Text input with checkbox">
-                    </div>
-                  </div>
-                  <div class="form-group col-md-2">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                      <input type="text" class="form-control" value="Thursday" aria-label="Text input with checkbox">
-                    </div>
-                  </div>
-                  <div class="form-group col-md-2">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                      <input type="text" class="form-control" value="Friday" aria-label="Text input with checkbox">
-                    </div>
+                  <label style="padding-left: 2%;">Open on:</label>&nbsp;&nbsp;
+                  <!-- <div class="form-group col-md-2">
+                    <div class="input-group"> -->
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                        <label class="custom-control-label" for="customCheck1">Monday</label>
+                      </div>&nbsp;&nbsp;
+                   <!--  </div>
+                  </div> -->
+                  <!-- <div class="form-group col-md-2">
+                    <div class="input-group"> -->
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                        <label class="custom-control-label" for="customCheck2">Tuesday</label>
+                      </div>&nbsp;&nbsp;
+                     <!--  </div>
+                    </div> -->
+                  <!-- <div class="form-group col-md-2">
+                    <div class="input-group"> -->
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck3">
+                        <label class="custom-control-label" for="customCheck3">Wednesday</label>
+                      </div>&nbsp;&nbsp;
+                    <!-- </div>
+                  </div> -->
+                  <!-- <div class="form-group col-md-2">
+                    <div class="input-group"> -->
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck4">
+                        <label class="custom-control-label" for="customCheck4">Thursday</label>
+                      </div>&nbsp;&nbsp;
+                    <!-- </div>
+                  </div> -->
+                  <!-- <div class="form-group col-md-2">
+                    <div class="input-group"> -->
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                        <label class="custom-control-label" for="customCheck5">Friday</label>
+                      </div>&nbsp;&nbsp;
+                    <!-- </div>
+                  </div> -->
+                 <!--  <div class="form-group col-md-2">
+                    <div class="input-group"> -->
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck6">
+                        <label class="custom-control-label" for="customCheck6">Saturday</label>
+                      </div>&nbsp;&nbsp;
+                    <!-- </div>
+                  </div> -->
+                  <!-- <div class="form-group col-md-2">
+                    <div class="input-group"> -->
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck7">
+                        <label class="custom-control-label" for="customCheck7">Sunday</label>
+                      </div>&nbsp;&nbsp;
+                    <!-- </div>
+                  </div> -->
+
+                <div class="col-md-12">
+                  <div class="row">
+                    <label style="padding-left: 2%;">Delivery Type:</label>&nbsp;&nbsp;
+                    <!-- <div class="form-group col-md-2">
+                      <div class="input-group"> -->
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck8">
+                          <label class="custom-control-label" for="customCheck8">Shop Delivery</label>
+                        </div>&nbsp;&nbsp;
+                      <!-- </div>
+                    </div> -->
+                    <!-- <div class="form-group col-md-2">
+                      <div class="input-group"> -->
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck9">
+                          <label class="custom-control-label" for="customCheck9">App Delivery</label>
+                        </div>&nbsp;&nbsp;
+                      <!-- </div>
+                    </div> -->
                   </div>
                 </div>
-                <div class="row">
-                  <label style="padding-left: 8%;"></label>
-                  <div class="form-group col-md-2">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                      <input type="text" class="form-control" value="Saturday" aria-label="Text input with checkbox">
-                    </div>
-                  </div>
-                  <div class="form-group col-md-2">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                      <input type="text" class="form-control" value="Sunday" aria-label="Text input with checkbox">
+                
+                <div class="col-md-2 offset-md-5">
+                  <div class="row">
+                    <div class="text-center">
+                      <button type="button" class="btn btn-primary text-center mt-4">Register</button>
                     </div>
                   </div>
                 </div>
 
-                <div class="row">
-                  <label style="padding-left: 2%;">Delivery Type:</label>
-                  <div class="form-group col-md-2">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                      <input type="text" class="form-control" value="Self Delivery" aria-label="Text input with checkbox">
-                    </div>
-                  </div>
-                  <div class="form-group col-md-2">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                      <input type="text" class="form-control" value="App Delivery" aria-label="Text input with checkbox">
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="text-center">
-                  <button type="button" class="btn btn-primary mt-4">Register</button>
-                </div>
               </form>
             </div>
           </div>

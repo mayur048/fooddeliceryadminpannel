@@ -152,7 +152,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                       </div>
-                      <textarea class="form-control" placeholder="Addrress" rows="4"> Shop Address</textarea>
+                      <textarea class="form-control" placeholder="Shop Addrress" rows="4"></textarea>
                     </div>
                   </div>  
                   <div class="form-group col-md-6">
@@ -177,7 +177,7 @@
                   <div class="form-group col-md-6">
                     <div class="input-group input-group-merge input-group-alternative">
                       <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-file-image"></i></span>
+                        <span class="input-group-text"><i class="fas fa-file-image"></i>&nbsp;Shop Liscence</span>
                       </div>
                       <input class="form-control" placeholder="Shop Liscense" type="file">
                     </div>
@@ -188,42 +188,34 @@
                   <label style="padding-left: 2%;">Services:</label>
                   <div class="form-group col-md-2">
                     <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                        <label class="custom-control-label" for="customCheck1">Sweets</label>
                       </div>
-                      <input type="text" class="form-control" value="Sweets" aria-label="Text input with checkbox">
                     </div>
                   </div>
                   <div class="form-group col-md-2">
                     <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                        <label class="custom-control-label" for="customCheck2">Bakery</label>
                       </div>
-                      <input type="text" class="form-control" value="Bakery" aria-label="Text input with checkbox">
                     </div>
                   </div>
                   <div class="form-group col-md-2">
                     <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck3">
+                        <label class="custom-control-label" for="customCheck3">Juice</label>
                       </div>
-                      <input type="text" class="form-control" value="Juice" aria-label="Text input with checkbox">
                     </div>
                   </div>
                   <div class="form-group col-md-2">
                     <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck4">
+                        <label class="custom-control-label" for="customCheck4">Others</label>
                       </div>
-                      <input type="text" class="form-control" value="others" aria-label="Text input with checkbox">
                     </div>
                   </div>
                   <div class="form-group col-md-2">
