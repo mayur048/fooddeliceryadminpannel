@@ -52,6 +52,12 @@
               <span class="nav-link-text">View Shope</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="viewProductCategory.php">
+              <i class="fas fa-eye"></i>
+              <span class="nav-link-text">Product Category</span>
+            </a>
+          </li>
           <?php } ?>
         </ul>
       </div>

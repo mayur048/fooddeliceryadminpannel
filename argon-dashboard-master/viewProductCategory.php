@@ -1,10 +1,9 @@
-<?php
- session_start();
- include("config.php");
- if(!isset($_SESSION["Email"])) {
+<?php 
+include 'config.php';
+session_start();
+if(!isset($_SESSION["Email"])) {
   header("location: index.php");
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>View Admin</title>
+  <title>View Items</title>
   <!-- Favicon -->
   <!-- <link rel="icon" href="assets/img/brand/favicon.png" type="image/png"> -->
   <!-- Fonts -->
@@ -31,36 +30,27 @@
 <body>
   <!-- Sidenav -->
   <?php 
-    include("sidebar.php");
-   ?>
-  <!-- Main content -->
+    include("sidebar.php"); 
+  ?>
 
-    <!-- Header -->
-    <!-- Header -->
-    <div class="main-content" id="panel">
+  <!-- Main content -->
+  <div class="main-content" id="panel">
     <?php include("header.php");?>
-      <div class="header bg-primary pb-6">
-        <div class="container-fluid">
-          <div class="header-body">
-            <div class="row align-items-center py-4">
-              <div class="col-lg-6 col-7">
-                <h6 class="h2 text-white d-inline-block mb-0">View Admins</h6>
-                <!-- <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                  <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                    <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Tables</li>
-                  </ol>
-                </nav> -->
-              </div>
-              <div class="col-lg-6 col-5 text-right">
-                <a href="#" class="btn btn-sm btn-neutral">Add Admin</a>
-               <!--  <a href="#" class="btn btn-sm btn-neutral">Filters</a> -->
-              </div>
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">View Shop</h6>
+            </div>
+            <div class="col-lg-6 col-5 text-right">
+              <a href="" class="btn btn-sm btn-neutral">Add Shop</a>
+              <!-- <a href="add category.php" class="btn btn-sm btn-neutral">Add Product Category</a> -->
             </div>
           </div>
         </div>
       </div>
+    </div>
     <!-- Page content -->
     <div class="container-fluid mt--6">
       <div class="row">
@@ -71,20 +61,22 @@
               <h3 class="mb-0">Light table</h3>
             </div>
             <!-- Light table -->
+           
             <div class="table-responsive">
               <table id="mytable" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
-                    <th>Sr.No</th>
+                        <th>Sr.No</th>
                         <th>Name</th>
-                        <th>Phone.No</th>
+                        <!-- <th>Actions</th> -->
                     </tr>
                 </thead>
-                <tbody>
-                  <?php
-                   $dbQuery = mysqli_query($db,"SELECT * From `login` WHERE `roleId` = 2");
-                   $count = 1;
-                if (mysqli_num_rows($dbQuery) == 0) {
+                <tbody> 
+                <?php 
+                 $id = $_SESSION['ID'];
+                 $dbQuery = mysqli_query($db,"SELECT * FROM `productcategory` WHERE `shopId` = $id");
+                 $count = 1;
+                 if (mysqli_num_rows($dbQuery) == 0) {
                  ?>
                     <tr>
                       <td colspan="3" class="text-center">No Data Found</td>
@@ -95,28 +87,27 @@
                  ?>
                     <tr>
                         <td><?php echo $count;?></td>
-                        <td><?php echo $row['email'];?></td>
-                        <td><?php echo $row['phone'];?></td>
+                        <td><?php echo $row['Name'];?></td>
+                        <!-- <td><a href= "view%20items.php?id=<?php echo $row['shopId']?>">View Product</td> -->
                     </tr>
-                    <?php
+                <?php
                 $count++; 
             }
         }
             ?>
                 </tbody>
                 <tfoot>
-                    <tr>
+                <tr>
                         <th>Sr.No</th>
                         <th>Name</th>
-                        <th>Phone.No</th>
+                        <!-- <th>Actions</th> -->
                     </tr>
                 </tfoot>
-              </table>
+            </table>
             </div>
           </div>
         </div>
       </div>
-      <!-- Footer -->
       <?php include("footer.php"); ?>
     </div>
   </div>
@@ -140,10 +131,6 @@
         }        
       }
     }
-
-    $(document).ready(function() {
-        $('#mytable').DataTable();
-    } );
   </script>
 
   <!-- Argon Scripts -->
