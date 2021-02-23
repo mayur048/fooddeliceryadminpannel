@@ -1,3 +1,84 @@
+<?php
+  session_start();
+  include('config.php');
+  if (!isset($_SESSION['Email'])) {
+    echo '<script>window.location="register_1.php";</script>';
+  } else {
+    if(isset($_POST['submit'])) {
+      $sessionEmail = $_SESSION['Email'];
+      $dbQuery = mysqli_query($db,"SELECT * FROM `admindetails` WHERE `AD_Email` = '$sessionEmail'");
+      while ($row = mysqli_fetch_array($dbQuery)) {
+        $adminId = $row['AD_ID'];
+      }
+      // echo $adminId;
+      $shopName = $_POST['sname'];
+      $shopType = $_POST['stype'];
+      $shopEmail = $_POST['email'];
+      $shopContact = $_POST['contact'];
+      $state = $_POST['state'];
+      $city = $_POST['city'];
+      $shopAddress = $_POST['address'];
+      $shopPincode = $_POST['pin'];
+      $shopLandmark = $_POST['landmark'];
+      $shopLicence = $_FILES['shop']['name'];
+      $shopServices = $_POST['Sweets']." ,".$_POST['Bakery']." ,".$_POST['Juice']." ,".$_POST['others'];
+
+      
+      $targetDir = "files/Document/";
+      $targetFile = $targetDir.basename($shopLicence);
+      $uploadOk = 1;
+      $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+
+      $check = getimagesize($_FILES['shop']['tmp_name']);
+    if ($check !== false) {
+      $message = "File is an image - ".$check['mime'].".";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 1;
+    } else {
+      $message = "File is not an image.";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+    if (file_exists($targetFile)) {
+      $message = "Sorry, File already exists.";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+
+    if ($_FILES['shop']['size'] > 500000) {
+      $message = "Sorry, your file is too large";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+      $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+
+    if ($uploadOk == 0) {
+      echo '<script>alert("Sorry, your file was not uploaded.");</script>';
+      // echo "Sorry, your file was not uploaded.";
+    // if everything is ok, try to upload file
+    } else {
+      if (move_uploaded_file($_FILES['shop']['tmp_name'], $targetFile)) {
+        $dbQuery = "INSERT INTO `shop`(`userId`, `ShopeName`, `shopType`, `shopEmail`, `PhomeNo`, `state`, `city`, `Address`, `pinCode`, `landmark`, `shopLiscence`, `services`) VALUES ($adminId,'$shopName','$shopType','$shopEmail',$shopContact,'$state','$city','$shopAddress',$shopPincode,'$shopLandmark','$targetFile','$shopServices')";
+        if (mysqli_query($db,$dbQuery)) {
+          echo '<script>window.location="register_3.php";</script>';
+        } else {
+          echo 'sssssssssssssssss';
+        }
+        // echo "The file ". htmlspecialchars( basename( $targetFile)). " has been uploaded.";
+      } else {
+        // echo "Sorry, there was an error uploading your file.";
+        echo '<script>alert("Sorry, there was an error uploading your file.");</script>';
+      }
+    }
+
+    }
+  }
+?>
 <!DOCTYPE html>
 <html>
 
@@ -57,7 +138,7 @@
                 <medium>Shop Details</medium><br>
                 <small>Sign up with credentials</small>
               </div>
-              <form role="form">
+              <form role="form" method="POST" enctype="multipart/form-data">
 
                 <div class="row">
                   <div class="form-group col-md-6">
@@ -65,7 +146,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Shop Name" type="text">
+                      <input class="form-control" placeholder="Shop Name" name="sname" type="text">
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -73,7 +154,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-store"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Shop Type" type="text">
+                      <input class="form-control" placeholder="Shop Type" name="stype" type="text">
                     </div>
                   </div>
                 </div>
@@ -84,7 +165,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Shop Mail (if Any)" type="email">
+                      <input class="form-control" placeholder="Shop Mail (if Any)" name="email" type="email">
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -92,7 +173,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Shop Contact" type="number">
+                      <input class="form-control" placeholder="Shop Contact" name="contact" type="number">
                     </div>
                   </div>  
                 </div>
@@ -103,7 +184,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-flag-usa"></i>  </span>
                       </div>
-                      <select class="form-control" id="exampleFormControlSelect1">
+                      <select class="form-control" id="exampleFormControlSelect1" name="state">
                         <option value="">------Select State------</option>
                         <option value="Andhra Pradesh">Andhra Pradesh</option>
                         <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -141,7 +222,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-city"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Shop City" type="text">
+                      <input class="form-control" placeholder="Shop City" name="city" type="text">
                     </div>
                   </div>  
                 </div>
@@ -152,7 +233,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                       </div>
-                      <textarea class="form-control" placeholder="Shop Addrress" rows="4"></textarea>
+                      <textarea class="form-control" placeholder="Shop Addrress" name="address" rows="4"></textarea>
                     </div>
                   </div>  
                   <div class="form-group col-md-6">
@@ -160,7 +241,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Postal Code" type="number">
+                      <input class="form-control" placeholder="Postal Code" name="pin" type="number">
                     </div>
                   </div>
                 </div>
@@ -171,7 +252,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-landmark"></i></span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Landmark">
+                      <input type="text" class="form-control" name="landmark" placeholder="Landmark">
                     </div>
                   </div>  
                   <div class="form-group col-md-6">
@@ -179,7 +260,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-file-image"></i>&nbsp;Shop Liscence</span>
                       </div>
-                      <input class="form-control" placeholder="Shop Liscense" type="file">
+                      <input class="form-control" placeholder="Shop Liscense" name="shop" type="file">
                     </div>
                   </div>
                 </div>
@@ -189,7 +270,7 @@
                   <div class="form-group col-md-2">
                     <div class="input-group">
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                        <input type="checkbox" name="Sweets" class="custom-control-input" id="customCheck1">
                         <label class="custom-control-label" for="customCheck1">Sweets</label>
                       </div>
                     </div>
@@ -197,7 +278,7 @@
                   <div class="form-group col-md-2">
                     <div class="input-group">
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                        <input type="checkbox" name="Bakery" class="custom-control-input" id="customCheck2">
                         <label class="custom-control-label" for="customCheck2">Bakery</label>
                       </div>
                     </div>
@@ -205,7 +286,7 @@
                   <div class="form-group col-md-2">
                     <div class="input-group">
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck3">
+                        <input type="checkbox" name="Juice" class="custom-control-input" id="customCheck3">
                         <label class="custom-control-label" for="customCheck3">Juice</label>
                       </div>
                     </div>
@@ -213,20 +294,20 @@
                   <div class="form-group col-md-2">
                     <div class="input-group">
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck4">
+                        <input type="checkbox" name="others1" class="custom-control-input" id="customCheck4">
                         <label class="custom-control-label" for="customCheck4">Others</label>
                       </div>
                     </div>
                   </div>
                   <div class="form-group col-md-2">
                     <div class="input-group">
-                      <input type="text" class="form-control" placeholder="others">
+                      <input type="text" class="form-control" name="others" placeholder="others">
                     </div>
                   </div>
                 </div>
                 
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary mt-4">Save and Continue &nbsp;&nbsp;<i class="fas fa-long-arrow-alt-right"></i></button>
+                  <input type="submit" class="btn btn-primary mt-4" name = "submit" value = "Save and Continue" >
                 </div>
               </form>
             </div>

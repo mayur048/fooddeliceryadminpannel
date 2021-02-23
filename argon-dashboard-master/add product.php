@@ -1,7 +1,6 @@
 <?php 
     include("config.php");
-  session_start();
-
+    session_start();
   if (!isset($_SESSION["Email"])) {
     header("location: index.php");
   }
@@ -65,7 +64,6 @@
         echo '<script>alert("Sorry, there was an error uploading your file.");</script>';
       }
     }
-
   }
 ?>
 <!DOCTYPE html>

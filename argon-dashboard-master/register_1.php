@@ -1,3 +1,36 @@
+<?php
+   include("config.php");
+   if (isset($_POST['submit'])) {
+    
+    $fullName = $_POST['name'];
+    $userEmail = $_POST['email'];
+    $userContact = $_POST['contact'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $aadharCard = $_POST['aadhar'];
+    $panCard = $_POST['pan'];
+    $address = $_POST['address'];
+
+    $dbQuery = mysqli_query($db,"SELECT *  FROM `admindetails` WHERE `AD_Email` = '$userEmail' AND `AD_Contact` = '$userContact'");
+    if (mysqli_num_rows($dbQuery) == 1) {
+      $message = "Oops! seem you are already part of our family";
+      echo "<script>alert('$message');</script>";
+    } else {
+      $dbQuery = "INSERT INTO `admindetails`( `AD_Name`, `AD_Email`, `AD_Contact`, `AD_CityID`, `AD_StateID`, `AD_Aadhar`, `Ad_PAN`, `AD_Address`) VALUES ('$fullName','$userEmail',$userContact,'$city','$state','$aadharCard','$panCard','$address')";
+      if (mysqli_query($db,$dbQuery)) {
+        session_start();
+        $_SESSION['Email'] = $userEmail;
+        $_SESSION['contact'] = $userContact;
+        echo '<script>window.location="register_2.php";</script>';
+      }
+    }
+   }else {
+    echo "load lute";
+  }
+
+
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -57,7 +90,7 @@
                 <medium>Owner Details</medium><br>
                 <small>Sign up with credentials</small>
               </div>
-              <form role="form">
+              <form role="form" method = "POST" >
 
                 <div class="row">
                   <div class="form-group col-md-6">
@@ -65,7 +98,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Name" type="text">
+                      <input class="form-control" placeholder="Name" name = "name" type="text">
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -73,7 +106,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Email" type="email">
+                      <input class="form-control" placeholder="Email" name = "email" type="email">
                     </div>
                   </div>
                 </div>
@@ -84,7 +117,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Contact" type="number">
+                      <input class="form-control" placeholder="Contact" name = "contact" type="number">
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -92,7 +125,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-city"></i></span>
                       </div>
-                      <input class="form-control" placeholder="City" type="text">
+                      <input class="form-control" placeholder="City" name = "city" type="text">
                     </div>
                   </div>  
                 </div>
@@ -103,7 +136,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-flag-usa"></i>  </span>
                       </div>
-                        <select class="form-control" id="exampleFormControlSelect1">
+                        <select class="form-control" id="exampleFormControlSelect1" name = "state">
                           <option value="">------Select State------</option>
                           <option value="Andhra Pradesh">Andhra Pradesh</option>
                           <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -141,7 +174,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Aadhar Card Number" type="text">
+                      <input class="form-control" placeholder="Aadhar Card Number" name = "aadhar" type="text">
                     </div>
                   </div>  
                 </div>
@@ -152,7 +185,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Pan Card" type="text">
+                      <input class="form-control" placeholder="Pan Card" name = "pan" type="text">
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -160,7 +193,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                       </div>
-                      <textarea class="form-control" placeholder="Addrress" rows="4">Address</textarea>
+                      <textarea class="form-control" placeholder="Addrress" name = "address" rows="4">Address</textarea>
                     </div>
                   </div>  
                 </div>
@@ -177,7 +210,7 @@
                 </div> -->
 
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary mt-4">Save and Continue &nbsp;&nbsp;<i class="fas fa-long-arrow-alt-right"></i></button>
+                  <input type="submit" name="submit" class="btn btn-primary mt-4" value="Save and Continue">
                 </div>
               </form>
             </div>
