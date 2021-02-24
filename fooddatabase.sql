@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 10, 2021 at 07:41 PM
+-- Generation Time: Feb 24, 2021 at 09:07 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -24,6 +24,33 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admindetails`
+--
+
+CREATE TABLE `admindetails` (
+  `AD_ID` int(11) NOT NULL,
+  `AD_Name` varchar(90) NOT NULL,
+  `AD_Email` varchar(50) NOT NULL,
+  `AD_Contact` bigint(20) NOT NULL,
+  `AD_CityID` varchar(50) NOT NULL,
+  `AD_StateID` varchar(50) NOT NULL,
+  `AD_Aadhar` varchar(12) NOT NULL,
+  `Ad_PAN` varchar(10) NOT NULL,
+  `AD_Address` varchar(500) NOT NULL,
+  `isActive` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admindetails`
+--
+
+INSERT INTO `admindetails` (`AD_ID`, `AD_Name`, `AD_Email`, `AD_Contact`, `AD_CityID`, `AD_StateID`, `AD_Aadhar`, `Ad_PAN`, `AD_Address`, `isActive`) VALUES
+(1, 'shadow__07', 'guru@raja.com', 2342343, 'Mumbai', 'Maharashtra', '432435652345', '435234fdgg', 'Addressdfsgfdagfdagcvx', 1),
+(2, 'Anil Pandey', 'anilpandey@gmial.com', 1234567890, 'Chembur', 'Maharashtra', '123456789123', 'defrgf5gf2', 'Addressedededede', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `city`
 --
 
@@ -37,6 +64,43 @@ CREATE TABLE `city` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `documents`
+--
+
+CREATE TABLE `documents` (
+  `documentsId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `GSTINregNO` bigint(20) NOT NULL,
+  `businessType` varchar(100) NOT NULL,
+  `tradeName` varchar(100) NOT NULL,
+  `tradeNumber` bigint(20) NOT NULL,
+  `registrationDate` varchar(50) NOT NULL DEFAULT current_timestamp(),
+  `GSTType` varchar(100) NOT NULL,
+  `fassiName` varchar(50) NOT NULL,
+  `fassiNumber` bigint(20) NOT NULL,
+  `fassiExpiry` varchar(50) NOT NULL,
+  `AddressOnFassi` varchar(200) NOT NULL,
+  `businessAadharCard` varchar(100) NOT NULL,
+  `businessPanCard` varchar(100) NOT NULL,
+  `fassiCertificate` varchar(100) NOT NULL,
+  `openOn` varchar(100) NOT NULL,
+  `deliverType` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `documents`
+--
+
+INSERT INTO `documents` (`documentsId`, `userId`, `GSTINregNO`, `businessType`, `tradeName`, `tradeNumber`, `registrationDate`, `GSTType`, `fassiName`, `fassiNumber`, `fassiExpiry`, `AddressOnFassi`, `businessAadharCard`, `businessPanCard`, `fassiCertificate`, `openOn`, `deliverType`) VALUES
+(1, 3, 354, '$businessType', '$tradeName', 345, '0000-00-00 00:00:00', '$gstType', '$fassiName', 435, '0000-00-00', '$fassiAddress', '$aadharcardFile', '$panCardFile', '$fassiCertificateFile', '$openOn', '$deliveryType'),
+(2, 1, 123456, 'eddedede', 'dededede', 1234556, '2021-02-19', 'ededed', 'dede', 1233445445, '2021-02-12', 'edrfrgftvcd', 'files/Document/Screenshot (161).png', 'files/Document/Screenshot (164).png', 'files/Document/Screenshot (168).png', 'on,on,on,on,,,', 'on,on'),
+(3, 2, 1234567, 'chlothes', 'pawan trading', 98765, '2021-02-05', 'idk', 'idk', 123456789, '2021-02-01', 'chembur', 'files/Document/Screenshot (161).png', 'files/Document/Screenshot (162).png', 'files/Document/Screenshot (163).png', 'Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday', 'Shop Delivery,App Delivery'),
+(4, 2, 1234567, 'chlothes', 'pawan trading', 98765, '2021-02-05', 'idk', 'idk', 123456789, '2021-02-01', 'chembur', 'files/Document/Screenshot (161).png', 'files/Document/Screenshot (162).png', 'files/Document/Screenshot (163).png', 'Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday', 'Shop Delivery,App Delivery'),
+(5, 2, 1234567, 'chlothes', 'pawan trading', 98765, '2021-02-05', 'idk', 'idk', 123456789, '2021-02-01', 'chembur', 'files/Document/Screenshot (161).png', 'files/Document/Screenshot (162).png', 'files/Document/Screenshot (163).png', 'Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday', 'Shop Delivery,App Delivery');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `login`
 --
 
@@ -44,9 +108,8 @@ CREATE TABLE `login` (
   `userId` int(11) NOT NULL,
   `email` varchar(60) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `phone` bigint(20) NOT NULL,
   `roleId` int(11) NOT NULL,
-  `isActive` tinyint(1) NOT NULL,
+  `isActive` tinyint(1) NOT NULL DEFAULT 1,
   `createDate` datetime NOT NULL DEFAULT current_timestamp(),
   `updataDate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -55,8 +118,10 @@ CREATE TABLE `login` (
 -- Dumping data for table `login`
 --
 
-INSERT INTO `login` (`userId`, `email`, `password`, `phone`, `roleId`, `isActive`, `createDate`, `updataDate`) VALUES
-(1, 'Shadow@walker.com', 'dhX97@#dfkj', 9192599959, 1, 1, '2021-02-04 18:00:34', '2021-02-04 18:00:54');
+INSERT INTO `login` (`userId`, `email`, `password`, `roleId`, `isActive`, `createDate`, `updataDate`) VALUES
+(1, 'Shadow@walker.com', 'dhX97@#dfkj', 1, 1, '2021-02-04 18:00:34', '2021-02-04 18:00:54'),
+(2, 'mayurshah@gmail.com', '12345', 2, 1, '2021-02-12 14:51:05', '2021-02-12 14:51:05'),
+(4, 'anilpandey@gmial.com', '123456', 2, 1, '2021-02-25 01:34:46', '2021-02-25 01:34:46');
 
 -- --------------------------------------------------------
 
@@ -86,12 +151,14 @@ INSERT INTO `ordereditems` (`productId`, `orderId`, `quantity`) VALUES
 
 CREATE TABLE `product` (
   `productId` int(11) NOT NULL,
+  `productName` varchar(100) NOT NULL,
   `shopId` int(11) NOT NULL,
   `ProductDesc` varchar(500) NOT NULL,
   `ProductSummary` varchar(100) NOT NULL,
   `Price` int(11) NOT NULL,
   `DiscountPrice` int(11) NOT NULL,
   `ProductCategoryId` int(11) NOT NULL,
+  `productImg` varchar(500) NOT NULL,
   `isActive` tinyint(1) NOT NULL DEFAULT 1,
   `createDate` datetime NOT NULL DEFAULT current_timestamp(),
   `updataDate` datetime NOT NULL DEFAULT current_timestamp()
@@ -101,8 +168,12 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`productId`, `shopId`, `ProductDesc`, `ProductSummary`, `Price`, `DiscountPrice`, `ProductCategoryId`, `isActive`, `createDate`, `updataDate`) VALUES
-(1, 1, 'SomeThing', 'wow', 5000, 10000, 1, 1, '2021-02-10 18:02:31', '2021-02-10 18:02:31');
+INSERT INTO `product` (`productId`, `productName`, `shopId`, `ProductDesc`, `ProductSummary`, `Price`, `DiscountPrice`, `ProductCategoryId`, `productImg`, `isActive`, `createDate`, `updataDate`) VALUES
+(1, 'something', 1, 'SomeThing', 'wow', 5000, 10000, 1, '', 1, '2021-02-10 18:02:31', '2021-02-10 18:02:31'),
+(2, 'p_2', 1, 'fdr', 'hfg', 56, 23, 2, '', 1, '2021-02-15 01:29:59', '2021-02-15 01:29:59'),
+(3, 'qwwqqe', 1, 'dsafsafsdfg', 'dsfafsd', 21334, 423, 1, 'files/productImg/Screenshot (160).png', 1, '2021-02-18 00:10:12', '2021-02-18 00:10:12'),
+(4, 'asasa', 1, 'ghjghyjcyg', 'suhydrftgudyh', 34, 54, 8, 'files/productImg/Screenshot (165).png', 1, '2021-02-18 11:42:01', '2021-02-18 11:42:01'),
+(5, 'qwwqqe', 1, 'sadas', 'asfdgads', 32, 43, 5, 'files/productImg/Screenshot (161).png', 1, '2021-02-18 15:12:36', '2021-02-18 15:12:36');
 
 -- --------------------------------------------------------
 
@@ -113,7 +184,7 @@ INSERT INTO `product` (`productId`, `shopId`, `ProductDesc`, `ProductSummary`, `
 CREATE TABLE `productcategory` (
   `ProductCategoryID` int(11) NOT NULL,
   `Name` varchar(100) NOT NULL,
-  `userId` int(11) NOT NULL,
+  `shopId` int(11) NOT NULL,
   `isActive` tinyint(1) NOT NULL DEFAULT 1,
   `createDate` datetime NOT NULL DEFAULT current_timestamp(),
   `updataDate` datetime NOT NULL DEFAULT current_timestamp()
@@ -123,8 +194,15 @@ CREATE TABLE `productcategory` (
 -- Dumping data for table `productcategory`
 --
 
-INSERT INTO `productcategory` (`ProductCategoryID`, `Name`, `userId`, `isActive`, `createDate`, `updataDate`) VALUES
-(1, 'sweets', 1, 1, '2021-02-10 18:02:31', '2021-02-25 18:02:31');
+INSERT INTO `productcategory` (`ProductCategoryID`, `Name`, `shopId`, `isActive`, `createDate`, `updataDate`) VALUES
+(1, 'sweets', 1, 1, '2021-02-10 18:02:31', '2021-02-25 18:02:31'),
+(2, 'pc_2', 1, 1, '2021-02-15 01:25:45', '2021-02-15 01:25:45'),
+(3, 'pc_3', 1, 1, '2021-02-15 01:25:51', '2021-02-15 01:25:51'),
+(4, 'anihd', 2, 1, '2021-02-17 00:09:54', '2021-02-17 00:09:54'),
+(5, 'samosa', 1, 1, '2021-02-17 00:34:21', '2021-02-17 00:34:21'),
+(7, 'samosa', 1, 1, '2021-02-17 00:38:23', '2021-02-17 00:38:23'),
+(8, 'shirt', 1, 1, '2021-02-18 11:41:16', '2021-02-18 11:41:16'),
+(9, 'something', 1, 1, '2021-02-18 15:10:56', '2021-02-18 15:10:56');
 
 -- --------------------------------------------------------
 
@@ -181,10 +259,17 @@ CREATE TABLE `shop` (
   `ShopId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `ShopeName` varchar(200) NOT NULL,
+  `shopType` varchar(50) NOT NULL,
+  `shopEmail` varchar(50) DEFAULT NULL,
   `PhomeNo` bigint(20) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `city` varchar(50) NOT NULL,
   `Address` varchar(200) NOT NULL,
   `street` varchar(50) NOT NULL,
   `pinCode` int(11) NOT NULL,
+  `landmark` varchar(50) NOT NULL,
+  `shopLiscence` varchar(100) NOT NULL,
+  `services` varchar(100) NOT NULL,
   `createDate` datetime NOT NULL DEFAULT current_timestamp(),
   `updataDate` datetime NOT NULL DEFAULT current_timestamp(),
   `isActive` tinyint(1) NOT NULL DEFAULT 1
@@ -194,8 +279,10 @@ CREATE TABLE `shop` (
 -- Dumping data for table `shop`
 --
 
-INSERT INTO `shop` (`ShopId`, `userId`, `ShopeName`, `PhomeNo`, `Address`, `street`, `pinCode`, `createDate`, `updataDate`, `isActive`) VALUES
-(1, 1, 'Shadownet', 91937999959, 'room no 13 t48, old barrack', 'chembur camp', 400075, '2021-02-10 18:02:31', '2021-02-25 18:02:31', 0);
+INSERT INTO `shop` (`ShopId`, `userId`, `ShopeName`, `shopType`, `shopEmail`, `PhomeNo`, `state`, `city`, `Address`, `street`, `pinCode`, `landmark`, `shopLiscence`, `services`, `createDate`, `updataDate`, `isActive`) VALUES
+(1, 2, 'Shadownet', '', NULL, 91937999959, '', '', 'room no 13 t48, old barrack', 'chembur camp', 400075, '', '', '', '2021-02-10 18:02:31', '2021-02-25 18:02:31', 1),
+(2, 1, 'qwe', 'dsfaws', 'sdfasd@gfg.bfgds', 9820477315, 'Odisha', 'Mumbai', 'chembur', '', 400071, 'tyutg', 'files/Document/IMG_1004.jpg', 'on ,on ,on ,', '2021-02-24 01:23:36', '2021-02-24 01:23:36', 1),
+(4, 2, 'Pawan clothing', 'chlothes', 'anilpandey@gmial.com', 1234567890, 'Maharashtra', 'Chembur', 'chembur', '', 400074, 'near my shop', 'files/Document/Screenshot (160).png', 'Sweets ,Bakery ,Juice ,', '2021-02-25 01:26:14', '2021-02-25 01:26:14', 1);
 
 -- --------------------------------------------------------
 
@@ -222,10 +309,22 @@ INSERT INTO `state` (`stateId`, `stateName`, `isActive`, `createDate`) VALUES
 --
 
 --
+-- Indexes for table `admindetails`
+--
+ALTER TABLE `admindetails`
+  ADD PRIMARY KEY (`AD_ID`);
+
+--
 -- Indexes for table `city`
 --
 ALTER TABLE `city`
   ADD PRIMARY KEY (`cityId`);
+
+--
+-- Indexes for table `documents`
+--
+ALTER TABLE `documents`
+  ADD PRIMARY KEY (`documentsId`);
 
 --
 -- Indexes for table `login`
@@ -274,28 +373,40 @@ ALTER TABLE `state`
 --
 
 --
+-- AUTO_INCREMENT for table `admindetails`
+--
+ALTER TABLE `admindetails`
+  MODIFY `AD_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `city`
 --
 ALTER TABLE `city`
   MODIFY `cityId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `documents`
+--
+ALTER TABLE `documents`
+  MODIFY `documentsId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `productcategory`
 --
 ALTER TABLE `productcategory`
-  MODIFY `ProductCategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ProductCategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `productorder`
@@ -313,7 +424,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `shop`
 --
 ALTER TABLE `shop`
-  MODIFY `ShopId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ShopId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `state`
