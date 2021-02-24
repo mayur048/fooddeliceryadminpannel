@@ -1,3 +1,132 @@
+<?php
+   include("config.php");
+   session_start();
+   $sessionEmail = $_SESSION['Email'];
+   $dbQuery = mysqli_query($db,"SELECT `userId` FROM `shop` WHERE `userId` IN (SELECT `AD_ID` FROM `admindetails` WHERE `AD_Email`='$sessionEmail')");  
+   if (mysqli_num_rows($dbQuery) == 0) {
+    echo "<script>alert('No Shope');  </script>";
+  } else {
+    $row = mysqli_fetch_array($dbQuery);
+    $id = $row['userId'];
+  }
+   if (isset($_POST['submit'])) {
+     $gstNumber = $_POST['gstNumber'];
+     $businessType = $_POST['businessType'];
+     $tradeName = $_POST['tradeName'];
+     $tradeNumber = $_POST['tradeNumber'];
+     $regDate = $_POST['regDate'];
+     $gstType = $_POST['gstType'];
+     $fassiName = $_POST['fassiName'];
+     $fassiNumber = $_POST['fassiNumber'];
+     $fasseiExpiry = $_POST['fasseiExpiry'];
+     $fassiAddress = $_POST['fassiAddress'];
+     $aadharcard = $_FILES['aadharcard']['name'];
+     $panCard = $_FILES['panCard']['name'];
+     $fassiCertificate = $_FILES['fassiCertificate']['name'];
+     $password = $_POST['password'];
+     $openOn = $_POST["monday"].",".$_POST["tuesday"].",".$_POST["wednesday"].",".$_POST["thursday"].",".$_POST["friday"].",".$_POST["saturday"].",".$_POST["sunday"];
+     $deliveryType = $_POST["shopDelivery"].",".$_POST["appDelivery"];
+
+     $targetDir = "files/Document/";
+
+     $aadharcardFile = $targetDir.basename($aadharcard);
+     $panCardFile = $targetDir.basename($panCard);
+     $fassiCertificateFile = $targetDir.basename($fassiCertificate);
+
+     $uploadOk = 1;
+
+     $aadharcardFileType = strtolower(pathinfo($aadharcardFile,PATHINFO_EXTENSION));
+     $panCardFileType = strtolower(pathinfo($panCardFile,PATHINFO_EXTENSION));
+     $fassiCertificateFileType = strtolower(pathinfo($fassiCertificateFile,PATHINFO_EXTENSION));
+
+    //  $aadharcardCheck = getimagesize($_FILES['aadharcard']['tmp_name']);
+    //  $panCardFileCheck = getimagesize($_FILES['panCard']['tmp_name']);
+    //  $fassiCertificateCheck = getimagesize($_FILES['fassiCertificate']['tmp_name']);
+
+    //  if ($aadharcardCheck !== false && $panCardFileCheck !== false && $fassiCertificateCheck !== false) {
+    //   $message = "File is an image - ".$check['mime'].".";
+    //   echo "<script>alert('$message');</script>";
+    //   $uploadOk = 1;
+    // } else {
+    //   $message = "File is not an image.";
+    //   echo "<script>alert('$message');</script>";
+    //   $uploadOk = 0;
+    // }
+
+    if (file_exists($aadharcardFile)) {
+      $message = "Sorry, aadharcard already exists.";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+
+    if (file_exists($panCardFile)) {
+      $message = "Sorry, panCard already exists.";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+
+    if (file_exists($fassiCertificateFile)) {
+      $message = "Sorry, fassiCertificate already exists.";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+
+    if ($_FILES['aadharcard']['size'] > 500000 && $_FILES['panCard']['size'] > 500000 && $_FILES['fassiCertificate']['size'] > 500000  ) {
+      $message = "Sorry, your file is too large";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+
+    if($aadharcardFileType != "jpg" && $aadharcardFileType != "png" && $aadharcardFileType != "jpeg" && $aadharcardFileType != "gif" ) {
+      $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+
+    if($panCardFileType != "jpg" && $panCardFileType != "png" && $panCardFileType != "jpeg" && $panCardFileType != "gif" ) {
+      $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+
+    if($fassiCertificateFileType != "jpg" && $fassiCertificateFileType != "png" && $fassiCertificateFileType != "jpeg" && $fassiCertificateFileType != "gif" ) {
+      $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+      echo "<script>alert('$message');</script>";
+      $uploadOk = 0;
+    }
+
+    if ($uploadOk == 0) {
+      echo '<script>alert("Sorry, your file was not uploaded.");</script>';
+      // echo "Sorry, your file was not uploaded.";
+    // if everything is ok, try to upload file
+    } else {
+      if (move_uploaded_file($_FILES['aadharcard']['tmp_name'], $aadharcardFile) && move_uploaded_file($_FILES['panCard']['tmp_name'], $panCardFile) && move_uploaded_file($_FILES['fassiCertificate']['tmp_name'], $fassiCertificateFile)) {
+        $dbQuery = "INSERT INTO `documents`(`userId`, `GSTINregNO`, `businessType`, `tradeName`, `tradeNumber`, `registrationDate`, `GSTType`, `fassiName`, `fassiNumber`, `fassiExpiry`, `AddressOnFassi`, `businessAadharCard`, `businessPanCard`, `fassiCertificate`, `openOn`, `deliverType`) VALUES ($id,$gstNumber,'$businessType','$tradeName',$tradeNumber,'$regDate','$gstType','$fassiName',$fassiNumber,'$fasseiExpiry','$fassiAddress','$aadharcardFile','$panCardFile','$fassiCertificateFile','$openOn','$deliveryType')";
+        if (mysqli_query($db,$dbQuery)) {
+          $dbQuery = "INSERT INTO `login`(`email`, `password`, `roleId`) VALUES ('$sessionEmail','$password',2)";
+          if (mysqli_query($db,$dbQuery)) {
+            unset($_SESSION['Email']);
+            unset($_SESSION['contact']);
+            session_destroy();
+            echo '<script>alert("done");</script>';
+          }else {
+            echo 'sssssssssssssssss1';
+          }
+        } else {
+          echo 'sssssssssssssssss';
+        }
+        // echo "The file ". htmlspecialchars( basename( $aadharcardFile)). " has been uploaded.";
+        // echo "The file ". htmlspecialchars( basename( $panCardFile)). " has been uploaded.";
+        // echo "The file ". htmlspecialchars( basename( $fassiCertificateFile)). " has been uploaded.";
+      } else {
+        // echo "Sorry, there was an error uploading your file.";
+        echo '<script>alert("Sorry, there was an error uploading your file.");</script>';
+      }
+    }
+
+   }
+  // }
+?>
 <!DOCTYPE html>
 <html>
 
@@ -57,7 +186,7 @@
                 <medium>Documents</medium><br>
                 <small>Sign up with credentials</small>
               </div>
-              <form role="form">
+              <form role="form" method = "POST" enctype="multipart/form-data">
 
                 <div class="row">
                   <div class="form-group col-md-6">
@@ -65,7 +194,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-list-ol"></i></span>
                       </div>
-                      <input class="form-control" placeholder="GSTIN Registration Number" type="number">
+                      <input class="form-control" name="gstNumber" placeholder="GSTIN Registration Number" type="number">
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -73,7 +202,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Business Type" type="text">
+                      <input class="form-control" name="businessType" placeholder="Business Type" type="text">
                     </div>
                   </div>
                 </div>
@@ -84,7 +213,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-trademark"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Trade Name" type="text">
+                      <input class="form-control" name="tradeName" placeholder="Trade Name" type="text">
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -92,7 +221,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-sort-numeric-up-alt"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Trade number" type="number">
+                      <input class="form-control" name="tradeNumber" placeholder="Trade number" type="number">
                     </div>
                   </div>  
                 </div>
@@ -103,7 +232,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">Registration Date:</span>
                       </div>
-                      <input class="form-control" placeholder="Registration Date" type="date">
+                      <input class="form-control" name="regDate" placeholder="Registration Date" type="date">
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -111,7 +240,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-i-cursor"></i></span>
                       </div>
-                      <input class="form-control" placeholder="GST type" type="text">
+                      <input class="form-control" name="gstType" placeholder="GST type" type="text">
                     </div>
                   </div>  
                 </div>
@@ -122,7 +251,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-signature"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Fassi Name" type="text">
+                      <input class="form-control" name="fassiName" placeholder="Fassi Name" type="text">
                     </div>
                   </div>  
                   <div class="form-group col-md-6">
@@ -130,7 +259,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Fassi Number" type="number">
+                      <input class="form-control" name="fassiNumber" placeholder="Fassi Number" type="number">
                     </div>
                   </div>
                 </div>
@@ -141,7 +270,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">Fassi Expiry:</span>
                       </div>
-                      <input type="date" class="form-control" placeholder="Fassi Expiry">
+                      <input type="date" class="form-control" name="fasseiExpiry" placeholder="Fassi Expiry">
                     </div>
                   </div>  
                   <div class="form-group col-md-6">
@@ -149,7 +278,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                       </div>
-                      <textarea class="form-control" placeholder="Address on Fassi" rows="4"></textarea>
+                      <textarea class="form-control" name="fassiAddress" placeholder="Address on Fassi" rows="4"></textarea>
                     </div>
                   </div>
                 </div>
@@ -160,7 +289,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-id-card"></i>&nbsp;Business Aadhar Card</span>
                       </div>
-                      <input class="form-control" placeholder="Business Aadhar Card" type="file">
+                      <input class="form-control" name="aadharcard" placeholder="Business Aadhar Card" type="file">
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -168,7 +297,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-id-card"></i>&nbsp;Business Pan Card</span>
                       </div>
-                      <input class="form-control" placeholder="Business Pan Card" type="file">
+                      <input class="form-control" name="panCard" placeholder="Business Pan Card" type="file">
                     </div>
                   </div>
                 </div>
@@ -179,7 +308,15 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="far fa-file-image"></i>&nbsp;Fassi Certificate</span>
                       </div>
-                      <input class="form-control" placeholder="Fassi Certificate" type="file">
+                      <input class="form-control" name="fassiCertificate" placeholder="Fassi Certificate" type="file">
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <div class="input-group input-group-merge input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-key"></i>&nbsp;</span>
+                      </div>
+                      <input class="form-control" name="password" placeholder="Password" type="password">
                     </div>
                   </div>
                 </div>
@@ -189,7 +326,7 @@
                   <!-- <div class="form-group col-md-2">
                     <div class="input-group"> -->
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                        <input type="checkbox" name="monday" value="Monday" class="custom-control-input" id="customCheck1">
                         <label class="custom-control-label" for="customCheck1">Monday</label>
                       </div>&nbsp;&nbsp;
                    <!--  </div>
@@ -197,7 +334,7 @@
                   <!-- <div class="form-group col-md-2">
                     <div class="input-group"> -->
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                        <input type="checkbox" name="tuesday" value="Tuesday" class="custom-control-input" id="customCheck2">
                         <label class="custom-control-label" for="customCheck2">Tuesday</label>
                       </div>&nbsp;&nbsp;
                      <!--  </div>
@@ -205,7 +342,7 @@
                   <!-- <div class="form-group col-md-2">
                     <div class="input-group"> -->
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck3">
+                        <input type="checkbox" name="wednesday" value="Wednesday" class="custom-control-input" id="customCheck3">
                         <label class="custom-control-label" for="customCheck3">Wednesday</label>
                       </div>&nbsp;&nbsp;
                     <!-- </div>
@@ -213,7 +350,7 @@
                   <!-- <div class="form-group col-md-2">
                     <div class="input-group"> -->
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck4">
+                        <input type="checkbox" name="thursday" value="Thursday" class="custom-control-input" id="customCheck4">
                         <label class="custom-control-label" for="customCheck4">Thursday</label>
                       </div>&nbsp;&nbsp;
                     <!-- </div>
@@ -221,7 +358,7 @@
                   <!-- <div class="form-group col-md-2">
                     <div class="input-group"> -->
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                        <input type="checkbox" name="friday" value="Friday" class="custom-control-input" id="customCheck5">
                         <label class="custom-control-label" for="customCheck5">Friday</label>
                       </div>&nbsp;&nbsp;
                     <!-- </div>
@@ -229,7 +366,7 @@
                  <!--  <div class="form-group col-md-2">
                     <div class="input-group"> -->
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck6">
+                        <input type="checkbox" name="saturday" value="Saturday" class="custom-control-input" id="customCheck6">
                         <label class="custom-control-label" for="customCheck6">Saturday</label>
                       </div>&nbsp;&nbsp;
                     <!-- </div>
@@ -237,7 +374,7 @@
                   <!-- <div class="form-group col-md-2">
                     <div class="input-group"> -->
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck7">
+                        <input type="checkbox" name="sunday" value="Sunday" class="custom-control-input" id="customCheck7">
                         <label class="custom-control-label" for="customCheck7">Sunday</label>
                       </div>&nbsp;&nbsp;
                     <!-- </div>
@@ -249,7 +386,7 @@
                     <!-- <div class="form-group col-md-2">
                       <div class="input-group"> -->
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="customCheck8">
+                          <input type="checkbox" name="shopDelivery" value="Shop Delivery" class="custom-control-input" id="customCheck8">
                           <label class="custom-control-label" for="customCheck8">Shop Delivery</label>
                         </div>&nbsp;&nbsp;
                       <!-- </div>
@@ -257,7 +394,7 @@
                     <!-- <div class="form-group col-md-2">
                       <div class="input-group"> -->
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="customCheck9">
+                          <input type="checkbox" name="appDelivery" value="App Delivery" class="custom-control-input" id="customCheck9">
                           <label class="custom-control-label" for="customCheck9">App Delivery</label>
                         </div>&nbsp;&nbsp;
                       <!-- </div>
@@ -268,7 +405,7 @@
                 <div class="col-md-2 offset-md-5">
                   <div class="row">
                     <div class="text-center">
-                      <button type="button" class="btn btn-primary text-center mt-4">Register</button>
+                      <input type="submit" name="submit" class="btn btn-primary text-center mt-4" value="Register">
                     </div>
                   </div>
                 </div>

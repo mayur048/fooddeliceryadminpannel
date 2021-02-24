@@ -270,7 +270,7 @@
                   <div class="form-group col-md-2">
                     <div class="input-group">
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="Sweets" class="custom-control-input" id="customCheck1">
+                        <input type="checkbox" name="Sweets" class="custom-control-input" value="Sweets" id="customCheck1">
                         <label class="custom-control-label" for="customCheck1">Sweets</label>
                       </div>
                     </div>
@@ -278,7 +278,7 @@
                   <div class="form-group col-md-2">
                     <div class="input-group">
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="Bakery" class="custom-control-input" id="customCheck2">
+                        <input type="checkbox" name="Bakery" class="custom-control-input" value="Bakery" id="customCheck2">
                         <label class="custom-control-label" for="customCheck2">Bakery</label>
                       </div>
                     </div>
@@ -286,7 +286,7 @@
                   <div class="form-group col-md-2">
                     <div class="input-group">
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="Juice" class="custom-control-input" id="customCheck3">
+                        <input type="checkbox" name="Juice" class="custom-control-input" value="Juice" id="customCheck3">
                         <label class="custom-control-label" for="customCheck3">Juice</label>
                       </div>
                     </div>
@@ -294,7 +294,7 @@
                   <div class="form-group col-md-2">
                     <div class="input-group">
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="others1" class="custom-control-input" id="customCheck4">
+                        <input type="checkbox" name="others1" class="custom-control-input" value="others1" id="customCheck4">
                         <label class="custom-control-label" for="customCheck4">Others</label>
                       </div>
                     </div>
