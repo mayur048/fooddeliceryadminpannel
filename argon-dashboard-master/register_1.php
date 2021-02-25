@@ -25,12 +25,12 @@
       }
     }
    }else {
-    echo "load lute";
+    // echo "load lute";
   }
 
 
 
-?>
+?> 
 <!DOCTYPE html>
 <html>
 
@@ -90,7 +90,7 @@
                 <medium>Owner Details</medium><br>
                 <small>Sign up with credentials</small>
               </div>
-              <form role="form" method = "POST" >
+              <form role="form" method = "POST" name="reg1">
 
                 <div class="row">
                   <div class="form-group col-md-6">
@@ -185,7 +185,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Pan Card" name = "pan" type="text">
+                      <input class="form-control" placeholder="Pan Card" name = "pan" type="text" onkeyup="this.value = this.value.toUpperCase();">
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -193,7 +193,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                       </div>
-                      <textarea class="form-control" placeholder="Addrress" name = "address" rows="4">Address</textarea>
+                      <textarea class="form-control" placeholder="Address" name="address" rows="4"></textarea>
                     </div>
                   </div>  
                 </div>
@@ -210,7 +210,7 @@
                 </div> -->
 
                 <div class="text-center">
-                  <input type="submit" name="submit" class="btn btn-primary mt-4" value="Save and Continue">
+                  <input type="submit" name="submit" class="btn btn-primary mt-4" value="Save and Continue" onclick="return reg1_validate()">
                 </div>
               </form>
             </div>
@@ -240,6 +240,65 @@
   <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="assets/js/argon.js?v=1.2.0"></script>
+  <script type="text/javascript">
+    function reg1_validate(){
+      var Name = document.forms["reg1"]["name"].value;
+      var Email = document.forms["reg1"]["email"].value;
+      var Contact = document.forms["reg1"]["contact"].value;
+      var City = document.forms["reg1"]["city"].value;
+      var State = document.forms["reg1"]["state"].value;
+      var Aadhar = document.forms["reg1"]["aadhar"].value;
+      var Pan = document.forms["reg1"]["pan"].value.toUpperCase();
+      var regex = /([A-Z]){5}([0-9]){4}([A-Z]){1}$/;
+      var Paddress = document.forms["reg1"]["address"].value;
+
+      if(Name == ""){
+        alert("Enter the Name!");
+        return false;
+      }
+      if(Email == ""){
+        alert("Enter the Email!");
+        return false;
+      }
+      if(Contact == ""){
+        alert("Enter the Contact!");
+        return false;
+      }
+      if(Contact.length > 10 || Contact.length < 10){
+        alert("Enter the proper Contact!");
+        return false;
+      }
+      if(City == ""){
+        alert("Enter the City!");
+        return false;
+      }
+      if(State == ""){
+        alert("Select the State!");
+        return false;
+      }
+      if(Aadhar == ""){
+        alert("Enter the Aadhar!");
+        return false;
+      }
+      if(Aadhar.length < 12 || Aadhar.length > 12){
+        alert("Enter Proper Aadhar Number!");
+        return false;
+      }
+      if(Pan == ""){
+        alert("Enter the Pan!");
+        return false;
+      }
+      if(!regex.test(Pan)){
+        alert("Enter Proper Pan Number!");
+        return false;
+      }
+      if(Paddress == ""){
+        alert("Enter the Address!");
+        return false;
+      }
+      return true;
+    }
+  </script>
 </body>
 
 </html>

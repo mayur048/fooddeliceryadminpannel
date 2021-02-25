@@ -138,7 +138,7 @@
                 <medium>Shop Details</medium><br>
                 <small>Sign up with credentials</small>
               </div>
-              <form role="form" method="POST" enctype="multipart/form-data">
+              <form role="form" name="reg2" method="POST" enctype="multipart/form-data">
 
                 <div class="row">
                   <div class="form-group col-md-6">
@@ -294,12 +294,12 @@
                   <div class="form-group col-md-2">
                     <div class="input-group">
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="others1" class="custom-control-input" value="others1" id="customCheck4">
+                        <input type="checkbox" name="others1" class="custom-control-input" id="customCheck4" value="others1">
                         <label class="custom-control-label" for="customCheck4">Others</label>
                       </div>
                     </div>
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-2" id="inputbox" style="display: none;">
                     <div class="input-group">
                       <input type="text" class="form-control" name="others" placeholder="others">
                     </div>
@@ -307,7 +307,7 @@
                 </div>
                 
                 <div class="text-center">
-                  <input type="submit" class="btn btn-primary mt-4" name = "submit" value = "Save and Continue" >
+                  <input type="submit" class="btn btn-primary mt-4" name="submit" value = "Save and Continue" onclick="return reg2_validate()">
                 </div>
               </form>
             </div>
@@ -337,6 +337,94 @@
   <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="assets/js/argon.js?v=1.2.0"></script>
+
+  <script type="text/javascript">
+    function reg2_validate(){
+      var name = document.forms["reg2"]["sname"].value;
+      var Stype = document.forms["reg2"]["stype"].value;
+      var Contact = document.forms["reg2"]["contact"].value;
+      var State = document.forms["reg2"]["state"].value;
+      var Scity = document.forms["reg2"]["city"].value;
+      var Address = document.forms["reg2"]["address"].value;
+      var Pin = document.forms["reg2"]["pin"].value;
+      var Landmark = document.forms["reg2"]["landmark"].value;
+      var Sliscence = document.forms["reg2"]["shop"].value;
+
+      var sweets = document.getElementById("customCheck1").checked;
+      var juice = document.getElementById("customCheck2").checked;
+      var bakery = document.getElementById("customCheck3").checked;
+      var others = document.forms["reg2"]["others"].value;
+      var others1 = document.getElementById("customCheck4").checked;
+
+      if(name == ""){
+        alert("Enter Shop Name!");
+        return false;
+      }
+      if(Stype == ""){
+        alert("Enter Shop Type!");
+        return false;
+      }
+      if(Contact == ""){
+        alert("Enter Shop Contact!");
+        return false;
+      }
+      if(Contact.length < 10 || Contact.length > 10){
+        alert("Enter correct Shop Contact!");
+        return false;
+      }
+      if(State == ""){
+        alert("Select The State!");
+        return false;
+      }
+      if(Scity == ""){
+        alert("Enter the City!");
+        return false;
+      }
+      if(Address == ""){
+        alert("Enter the Address!");
+        return false;
+      }
+      if(Pin == ""){
+        alert("Enter the Postal Code!");
+        return false;
+      }
+      if(Pin.length < 6 || Pin.length > 6){
+        alert("Enter Proper Postal Code!");
+        return false;
+      }
+      if(Landmark == ""){
+        alert("Enter the Landmark!");
+        return false;
+      }
+      if(Sliscence == ""){
+        alert("Select tha Shop Liscence!");
+        return false;
+      }
+      if(sweets== false && juice== false && bakery==false && others1==false){
+        alert("Select Any One of the Services!");
+        return false;
+      }
+      if(others1 == true) {
+        if(others == ""){
+          alert("Enter the Others Field");
+          return false;
+        }
+      }
+      return true;
+    }
+  </script>
+
+  <script type="text/javascript">
+    $(function(){
+      $("#customCheck4").click(function(){
+        if($(this).is(":checked")){
+          $("#inputbox").show();
+        }else{
+          $("#inputbox").hide();
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

@@ -186,7 +186,7 @@
                 <medium>Documents</medium><br>
                 <small>Sign up with credentials</small>
               </div>
-              <form role="form" method = "POST" enctype="multipart/form-data">
+              <form role="form" method = "POST" enctype="multipart/form-data" name="reg3">
 
                 <div class="row">
                   <div class="form-group col-md-6">
@@ -194,7 +194,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-list-ol"></i></span>
                       </div>
-                      <input class="form-control" name="gstNumber" placeholder="GSTIN Registration Number" type="number">
+                      <input class="form-control" name="gstNumber" placeholder="GSTIN Registration Number" type="text">
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -386,7 +386,7 @@
                     <!-- <div class="form-group col-md-2">
                       <div class="input-group"> -->
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" name="shopDelivery" value="Shop Delivery" class="custom-control-input" id="customCheck8">
+                          <input type="radio" name="Delivery" value="Shop Delivery" class="custom-control-input" id="customCheck8" checked="false">
                           <label class="custom-control-label" for="customCheck8">Shop Delivery</label>
                         </div>&nbsp;&nbsp;
                       <!-- </div>
@@ -394,7 +394,7 @@
                     <!-- <div class="form-group col-md-2">
                       <div class="input-group"> -->
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" name="appDelivery" value="App Delivery" class="custom-control-input" id="customCheck9">
+                          <input type="radio" name="Delivery" value="App Delivery" class="custom-control-input" id="customCheck9">
                           <label class="custom-control-label" for="customCheck9">App Delivery</label>
                         </div>&nbsp;&nbsp;
                       <!-- </div>
@@ -405,7 +405,7 @@
                 <div class="col-md-2 offset-md-5">
                   <div class="row">
                     <div class="text-center">
-                      <input type="submit" name="submit" class="btn btn-primary text-center mt-4" value="Register">
+                      <input type="submit" name="submit" class="btn btn-primary text-center mt-4" value="Register" onclick="return reg3_validate()">
                     </div>
                   </div>
                 </div>
@@ -438,6 +438,110 @@
   <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="assets/js/argon.js?v=1.2.0"></script>
+  <script type="text/javascript">
+    function reg3_validate(){
+      var GSTIN = document.forms["reg3"]["gstNumber"].value;
+      var gstinformat = /[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+      var Btype = document.forms["reg3"]["businessType"].value;
+      var Tname = document.forms["reg3"]["tradeName"].value;
+      var Tnum = document.forms["reg3"]["tradeNumber"].value;
+      var Regdate = document.forms["reg3"]["regDate"].value;
+      var Gtype = document.forms["reg3"]["gstType"].value;
+      var Fname = document.forms["reg3"]["fassiName"].value;
+      var Fnum = document.forms["reg3"]["fassiNumber"].value;
+      var Fexpiry = document.forms["reg3"]["fasseiExpiry"].value;
+      var Faddr = document.forms["reg3"]["fassiAddress"].value;
+      var Aadhar = document.forms["reg3"]["aadharcard"].value;
+      var Pan = document.forms["reg3"]["panCard"].value;
+      var Fcerti = document.forms["reg3"]["fassiCertificate"].value;
+      var Password = document.forms["reg3"]["password"].value;
+      var Delivery = document.forms["reg3"]["Delivery"].value;
+      
+      var Monday = document.getElementById("customCheck1").checked;
+      var Tuesday = document.getElementById("customCheck2").checked;
+      var Wednesday = document.getElementById("customCheck3").checked;
+      var Thursday = document.getElementById("customCheck4").checked;
+      var Friday = document.getElementById("customCheck5").checked;
+      var Saturday = document.getElementById("customCheck6").checked;
+      var Sunday = document.getElementById("customCheck7").checked;
+      
+
+      if(GSTIN == ""){
+        alert("Enter GSTIN Number!");
+        return false;
+      }
+      if(!gstinformat.test(GSTIN)){
+        alert("Enter Proper GSTN Number!");
+        return false;
+      }
+      if(Btype == ""){
+        alert("Enter Business Type!");
+        return false;
+      }
+      if(Tname == ""){
+        alert("Enter Trade Name!");
+        return false;
+      }
+      if(Tnum == ""){
+        alert("Enter Trade Number!");
+        return false;
+      }
+      if(Regdate == ""){
+        alert("Select GST Registration Date!");
+        return false;
+      }
+      if(Gtype == ""){
+        alert("Enter GST Type!");
+        return false;
+      }
+      if(Fname == ""){
+        alert("Enter Fassi Name!");
+        return false;
+      }
+      if(Fnum == ""){
+        alert("Enter Fassi Number!");
+        return false;
+      }
+      if(Fexpiry == ""){
+        alert("Select Fassi Date!");
+        return false;
+      }
+      if(Faddr == ""){
+        alert("Enter Fassi Address!");
+        return false;
+      }
+      if(Aadhar == ""){
+        alert("Upload Business Aadhar Card!");
+        return false;
+      }
+      if(Pan == ""){
+        alert("Upload Business Pan Card");
+        return false;
+      }
+      if(Fcerti == ""){
+        alert("Upload Fassi Certificate");
+        return false;
+      }
+      if(Passowrd == ""){
+        alert("Enter Password!");
+        return false;
+      }
+      if(Password.length < 8){
+        alert("Password should have 8 characters");
+        return false;
+      }
+      if(monday=="false" && tuesday=="false" && wednesday=="false" && thursday=="false" && friday=="false" && saturday=="false" && sunday=="false"){
+        alert("Select at least 5 days");
+        return false;
+      }
+      if(Delivery ==""){
+        alert("Selct Any One Delivery Type");
+        return false;
+      }
+      return true;
+
+    }
+  </script>
 </body>
 
 </html>
