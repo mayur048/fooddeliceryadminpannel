@@ -1,10 +1,6 @@
-<?php
- session_start();
- include("config.php");
- if(!isset($_SESSION["Email"])) {
-  header("location: index.php");
-}
-
+<?php 
+  session_start();
+  include('config.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>View Admin</title>
+  <title>Verify Products</title>
   <!-- Favicon -->
   <!-- <link rel="icon" href="assets/img/brand/favicon.png" type="image/png"> -->
   <!-- Fonts -->
@@ -32,6 +28,7 @@
   <!-- Sidenav -->
   <?php 
     include("sidebar.php");
+    $dbQuery = mysqli_query($db,"SELECT * FROM `product` WHERE `status` = 'pending'");
    ?>
   <!-- Main content -->
 
@@ -44,7 +41,7 @@
           <div class="header-body">
             <div class="row align-items-center py-4">
               <div class="col-lg-6 col-7">
-                <h6 class="h2 text-white d-inline-block mb-0">View Admins</h6>
+                <h6 class="h2 text-white d-inline-block mb-0">Verify Products</h6>
                 <!-- <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                   <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                     <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
@@ -52,10 +49,6 @@
                     <li class="breadcrumb-item active" aria-current="page">Tables</li>
                   </ol>
                 </nav> -->
-              </div>
-              <div class="col-lg-6 col-5 text-right">
-                <a href="#" class="btn btn-sm btn-neutral">Add Admin</a>
-               <!--  <a href="#" class="btn btn-sm btn-neutral">Filters</a> -->
               </div>
             </div>
           </div>
@@ -68,35 +61,45 @@
           <div class="card">
             <!-- Card header -->
             <div class="card-header border-0">
-              <h3 class="mb-0">Light table</h3>
+              <h3 class="mb-0">Products table</h3>
             </div>
             <!-- Light table -->
             <div class="table-responsive">
               <table id="mytable" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
-                    <th>Sr.No</th>
-                        <th>Name</th>
-                        <th>Phone.No</th>
+                        <th>Sr.NO</th>
+                        <th>Product Name</th>
+                        <th>Product Description</th>
+                        <th>Price</th>
+                        <th>Discount Price</th>
+                        <th>Image</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                  <?php
-                   $dbQuery = mysqli_query($db,"SELECT * From `login` WHERE `roleId` = 2");
-                   $count = 1;
-                if (mysqli_num_rows($dbQuery) == 0) {
-                 ?>
+                <?php 
+                  $count = 1;
+                  if (mysqli_num_rows($dbQuery) == 0) {?>
                     <tr>
-                      <td colspan="3" class="text-center">No Data Found</td>
-                    </tr>
-                 <?php   
-                 } else {
-                   while ($row = mysqli_fetch_array($dbQuery)) {
-                 ?>
+                    <td colspan="3" class="text-center">No Data Found</td>
+                  </tr>
+               <?php   
+               } else {
+                 while ($row = mysqli_fetch_array($dbQuery)) {
+               
+                ?>
                     <tr>
                         <td><?php echo $count;?></td>
-                        <td><?php echo $row['email'];?></td>
-                        <td><?php echo $row['phone'];?></td>
+                        <td><?php echo $row['productName'];?></td>
+                        <td><?php echo $row['ProductDesc'];?></td>
+                        <td><?php echo $row['Price'];?></td>
+                        <td><?php echo $row['DiscountPrice'];?></td>
+                        <td><a href="<?php echo $row['productImg'];?>" target="_blank">View File</a></td>
+                        <td>
+                          <a href="status.php?id=<?php echo $row['productId'];?>&&status=Approve"><button class="btn btn-success"><i class="fa fa-check"></i></button></a>
+                          <a href="status.php?id=<?php echo $row['productId'];?>&&status=Reject"><button class="btn btn-warning"><i class="fa fa-times"></i></button></a>
+                        </td>
                     </tr>
                     <?php
                 $count++; 
@@ -106,9 +109,13 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Sr.No</th>
-                        <th>Name</th>
-                        <th>Phone.No</th>
+                    <th>Sr.NO</th>
+                        <th>Product Name</th>
+                        <th>Product Description</th>
+                        <th>Price</th>
+                        <th>Discount Price</th>
+                        <th>Image</th>
+                        <th>Actions</th>
                     </tr>
                 </tfoot>
               </table>

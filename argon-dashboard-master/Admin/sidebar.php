@@ -41,8 +41,20 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="approveProducts.php">
+              <i class="fas fa-exclamation"></i>
+              <span class="nav-link-text">Pending Products</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="approve.php">
               <i class="fas fa-check"></i>
-              <span class="nav-link-text">Approve Products</span>
+              <span class="nav-link-text">Approved Products</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="reject.php">
+              <i class="fas fa-times"></i>
+              <span class="nav-link-text">Rejected Products</span>
             </a>
           </li>
           <?php } else if ($dbResult['RoleName'] == 'admin') { ?>

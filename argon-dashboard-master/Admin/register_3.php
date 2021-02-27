@@ -108,7 +108,7 @@
             unset($_SESSION['Email']);
             unset($_SESSION['contact']);
             session_destroy();
-            echo '<script>alert("done");</script>';
+            echo '<script>window.location="register_3.php";</script>';
           }else {
             echo 'sssssssssssssssss1';
           }

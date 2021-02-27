@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2021 at 09:07 PM
+-- Generation Time: Feb 27, 2021 at 09:45 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -37,6 +37,7 @@ CREATE TABLE `admindetails` (
   `AD_Aadhar` varchar(12) NOT NULL,
   `Ad_PAN` varchar(10) NOT NULL,
   `AD_Address` varchar(500) NOT NULL,
+  `roleId` int(11) NOT NULL DEFAULT 2,
   `isActive` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -44,9 +45,9 @@ CREATE TABLE `admindetails` (
 -- Dumping data for table `admindetails`
 --
 
-INSERT INTO `admindetails` (`AD_ID`, `AD_Name`, `AD_Email`, `AD_Contact`, `AD_CityID`, `AD_StateID`, `AD_Aadhar`, `Ad_PAN`, `AD_Address`, `isActive`) VALUES
-(1, 'shadow__07', 'guru@raja.com', 2342343, 'Mumbai', 'Maharashtra', '432435652345', '435234fdgg', 'Addressdfsgfdagfdagcvx', 1),
-(2, 'Anil Pandey', 'anilpandey@gmial.com', 1234567890, 'Chembur', 'Maharashtra', '123456789123', 'defrgf5gf2', 'Addressedededede', 1);
+INSERT INTO `admindetails` (`AD_ID`, `AD_Name`, `AD_Email`, `AD_Contact`, `AD_CityID`, `AD_StateID`, `AD_Aadhar`, `Ad_PAN`, `AD_Address`, `roleId`, `isActive`) VALUES
+(1, 'shadow__07', 'guru@raja.com', 2342343, 'Mumbai', 'Maharashtra', '432435652345', '435234fdgg', 'Addressdfsgfdagfdagcvx', 2, 1),
+(2, 'Anil Pandey', 'anilpandey@gmial.com', 1234567890, 'Chembur', 'Maharashtra', '123456789123', 'defrgf5gf2', 'Addressedededede', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -159,6 +160,7 @@ CREATE TABLE `product` (
   `DiscountPrice` int(11) NOT NULL,
   `ProductCategoryId` int(11) NOT NULL,
   `productImg` varchar(500) NOT NULL,
+  `status` varchar(90) NOT NULL DEFAULT 'pending',
   `isActive` tinyint(1) NOT NULL DEFAULT 1,
   `createDate` datetime NOT NULL DEFAULT current_timestamp(),
   `updataDate` datetime NOT NULL DEFAULT current_timestamp()
@@ -168,12 +170,12 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`productId`, `productName`, `shopId`, `ProductDesc`, `ProductSummary`, `Price`, `DiscountPrice`, `ProductCategoryId`, `productImg`, `isActive`, `createDate`, `updataDate`) VALUES
-(1, 'something', 1, 'SomeThing', 'wow', 5000, 10000, 1, '', 1, '2021-02-10 18:02:31', '2021-02-10 18:02:31'),
-(2, 'p_2', 1, 'fdr', 'hfg', 56, 23, 2, '', 1, '2021-02-15 01:29:59', '2021-02-15 01:29:59'),
-(3, 'qwwqqe', 1, 'dsafsafsdfg', 'dsfafsd', 21334, 423, 1, 'files/productImg/Screenshot (160).png', 1, '2021-02-18 00:10:12', '2021-02-18 00:10:12'),
-(4, 'asasa', 1, 'ghjghyjcyg', 'suhydrftgudyh', 34, 54, 8, 'files/productImg/Screenshot (165).png', 1, '2021-02-18 11:42:01', '2021-02-18 11:42:01'),
-(5, 'qwwqqe', 1, 'sadas', 'asfdgads', 32, 43, 5, 'files/productImg/Screenshot (161).png', 1, '2021-02-18 15:12:36', '2021-02-18 15:12:36');
+INSERT INTO `product` (`productId`, `productName`, `shopId`, `ProductDesc`, `ProductSummary`, `Price`, `DiscountPrice`, `ProductCategoryId`, `productImg`, `status`, `isActive`, `createDate`, `updataDate`) VALUES
+(1, 'something', 1, 'SomeThing', 'wow', 5000, 10000, 1, '', 'Approve', 1, '2021-02-10 18:02:31', '2021-02-10 18:02:31'),
+(2, 'p_2', 1, 'fdr', 'hfg', 56, 23, 2, '', 'Reject', 1, '2021-02-15 01:29:59', '2021-02-15 01:29:59'),
+(3, 'qwwqqe', 1, 'dsafsafsdfg', 'dsfafsd', 21334, 423, 1, 'files/productImg/Screenshot (160).png', 'pending', 1, '2021-02-18 00:10:12', '2021-02-18 00:10:12'),
+(4, 'asasa', 1, 'ghjghyjcyg', 'suhydrftgudyh', 34, 54, 8, 'files/productImg/Screenshot (165).png', 'pending', 1, '2021-02-18 11:42:01', '2021-02-18 11:42:01'),
+(5, 'qwwqqe', 1, 'sadas', 'asfdgads', 32, 43, 5, 'files/productImg/Screenshot (161).png', 'pending', 1, '2021-02-18 15:12:36', '2021-02-18 15:12:36');
 
 -- --------------------------------------------------------
 
