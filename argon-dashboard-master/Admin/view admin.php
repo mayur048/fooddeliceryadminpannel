@@ -3,8 +3,10 @@
  include("config.php");
  if(!isset($_SESSION["Email"])) {
   header("location: index.php");
-}
+// echo "<script>alert(aa".session_id().");</script>";
 
+}
+// echo "<script>alert(aa".session_id().");</script>";
 ?>
 <!DOCTYPE html>
 <html>
@@ -97,26 +99,26 @@
                  ?>
 
                     <tr>
-                        <td style="color: #2dce89;"><?php echo $count;?></td>
-                        <td style="color: #2dce89;"><?php echo $row['AD_Name'];?></td>
-                        <td style="color: #2dce89;"><?php echo $row['AD_Email'];?></td>
-                        <td style="color: #2dce89;"><?php echo $row['AD_Contact'];?></td>
+                        <td style="color: #f5365c;"><?php echo $count;?></td>
+                        <td style="color: #f5365c;"><?php echo $row['AD_Name'];?></td>
+                        <td style="color: #f5365c;"><?php echo $row['AD_Email'];?></td>
+                        <td style="color: #f5365c;"><?php echo $row['AD_Contact'];?></td>
                         <td>
-                          <!-- <a href="status.php?id=<?php echo $row['AD_ID'];?>&&status=<?php echo $row['isActive'];?>"><button class="btn btn-success"><i class="fa fa-check"></i> DeActive</button></a> -->
-                          <a href="status.php?id=<?php echo $row['AD_ID'];?>&&status=<?php echo $row['isActive'];?>"><button class="btn btn-warning"><i class="fa fa-times"></i> DeActive</button></a>
+                           <a href="status.php?id=<?php echo $row['AD_ID'];?>&&status=<?php echo $row['isActive'];?>"><button class="btn btn-success"><i class="fa fa-check"></i> Active</button></a> 
+                          <!--<a href="status.php?id=<?php echo $row['AD_ID'];?>&&status=<?php echo $row['isActive'];?>"><button class="btn btn-warning"><i class="fa fa-times"></i> Active</button></a>-->
                         </td>
                     </tr>
                     <?php
                      } else {
                        ?>
                         <tr>
-                        <td style="color: #f5365c;"><?php echo $count;?></td>
-                        <td style="color: #f5365c;"><?php echo $row['AD_Name'];?></td>
-                        <td style="color: #f5365c;"><?php echo $row['AD_Email'];?></td>
-                        <td style="color: #f5365c;"><?php echo $row['AD_Contact'];?></td>
+                        <td style="color: #2dce89;"><?php echo $count;?></td>
+                        <td style="color: #2dce89;"><?php echo $row['AD_Name'];?></td>
+                        <td style="color: #2dce89;"><?php echo $row['AD_Email'];?></td>
+                        <td style="color: #2dce89;"><?php echo $row['AD_Contact'];?></td>
                         <td>
-                          <a href="status.php?id=<?php echo $row['AD_ID'];?>&&status=<?php echo $row['isActive'];?>"><button class="btn btn-success"><i class="fa fa-check"></i> Active</button></a>
-                          <!-- <a href="status.php?id=<?php echo $row['AD_ID'];?>&&status=<?php echo $row['isActive'];?>"><button class="btn btn-warning"><i class="fa fa-times"></i> Active</button></a> -->
+                          <!--<a href="status.php?id=<?php echo $row['AD_ID'];?>&&status=<?php echo $row['isActive'];?>"><button class="btn btn-success"><i class="fa fa-check"></i> DeActive</button></a>-->
+                           <a href="status.php?id=<?php echo $row['AD_ID'];?>&&status=<?php echo $row['isActive'];?>"><button class="btn btn-warning"><i class="fa fa-times"></i> DeActive</button></a> 
                         </td>
                     </tr>
                        <?php
