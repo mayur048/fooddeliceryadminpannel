@@ -30,11 +30,11 @@
       $uploadOk = 0;
     }
 
-    if (file_exists($targetFile)) {
-      $message = "Sorry, File already exists.";
-      echo "<script>alert('$message');</script>";
-      $uploadOk = 0;
-    }
+    // if (file_exists($targetFile)) {
+    //   $message = "Sorry, File already exists.";
+    //   echo "<script>alert('$message');</script>";
+    //   $uploadOk = 0;
+    // }
 
     if ($_FILES['productImg']['size'] > 500000) {
       $message = "Sorry, your file is too large";

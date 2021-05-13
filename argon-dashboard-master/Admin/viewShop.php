@@ -68,6 +68,7 @@ if(!isset($_SESSION["Email"])) {
                     <tr>
                         <th>Sr.No</th>
                         <th>Name</th>
+                        <th>Product</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -84,13 +85,29 @@ if(!isset($_SESSION["Email"])) {
                  <?php   
                  } else {
                    while ($row = mysqli_fetch_array($dbQuery)) {
+                    if ($row['isActive'] == 0) {
                  ?>
                     <tr>
                         <td><?php echo $count;?></td>
-                        <td><?php echo $row['ShopeName'];?></td>
+                        <td style="color: #f5365c;"><?php echo $row['ShopeName'];?></td>
                         <td><a href= "view%20items.php?id=<?php echo $row['ShopId']?>">View Product</td>
-                    </tr>
+                        <td>
+                           <a href="status.php?id=<?php echo $row['ShopId'];?>&&status=Close"><button class="btn btn-success"><i class="fa fa-check"></i> Active</button></a> 
+                        </td>
+                      </tr>
                 <?php
+                    }else{
+                      ?>
+                      <tr>
+                        <td><?php echo $count;?></td>
+                        <td style="color: #2dce89;"><?php echo $row['ShopeName'];?></td>
+                        <td><a href= "view%20items.php?id=<?php echo $row['ShopId']?>">View Product</td>
+                        <td>
+                           <a href="status.php?id=<?php echo $row['ShopId'];?>&&status=Open"><button class="btn btn-warning"><i class="fa fa-times"></i> DeActive</button></a> 
+                        </td>
+                      </tr>
+                      <?php
+                    }
                 $count++; 
             }
         }
@@ -100,6 +117,7 @@ if(!isset($_SESSION["Email"])) {
                 <tr>
                         <th>Sr.No</th>
                         <th>Name</th>
+                        <th>Product</th>
                         <th>Actions</th>
                     </tr>
                 </tfoot>
