@@ -68,7 +68,7 @@ if(!isset($_SESSION["Email"])) {
                     <tr>
                         <th>Sr.No</th>
                         <th>Name</th>
-                        <th>Product</th>
+                        <th>Product</th>  
                         <th>Actions</th>
                     </tr>
                 </thead>

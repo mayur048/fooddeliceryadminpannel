@@ -45,7 +45,7 @@ include 'config.php';
             </div>
             <div class="col-lg-6 col-5 text-right">
               <a href="add product.php?id=<?php echo $shopId;?>" class="btn btn-sm btn-neutral">Add Product</a>
-              <a href="add category.php?id=<?php echo $shopId;?>" class="btn btn-sm btn-neutral">Add Product Category</a>
+              <!-- <a href="add category.php?id=<?php echo $shopId;?>" class="btn btn-sm btn-neutral">Add Product Category</a> -->
             </div>
           </div>
         </div>

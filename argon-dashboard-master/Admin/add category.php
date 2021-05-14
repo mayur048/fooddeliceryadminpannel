@@ -15,8 +15,6 @@
       echo '<script>alert("Something Went Wrong!!");</script>';
       // echo "ERROR: Could not able to execute $dbQuery. " . mysqli_error($db);
     }
-  } else {
-    echo '<script>alert("Something Went Wrong!!");</script>';
   }
 ?>
 <!DOCTYPE html>
