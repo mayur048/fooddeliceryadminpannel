@@ -18,14 +18,14 @@ if ($status === "Approve") {
     }
 }
 
-if ($status === 0) {
+if ($status == 0) {
     if (mysqli_query($db,"UPDATE `admindetails` SET `isActive`= 1 WHERE `AD_ID` = $id")) {
         mysqli_query($db,"UPDATE `login` SET `isActive`= 1 WHERE `AD_ID` = $id");
         echo "<script>alert('$id has been Approve');</script>";
         echo '<script>window.location="view%20admin.php";</script>';
     }
 } else {
-    if ($status === 1) {
+    if ($status == 1) {
         if (mysqli_query($db,"UPDATE `admindetails` SET `isActive`= 0 WHERE `AD_ID` = $id")) {
             mysqli_query($db,"UPDATE `login` SET `isActive`= 0 WHERE `AD_ID` = $id");
             echo "<script>alert('$id has been Revoked');</script>";
