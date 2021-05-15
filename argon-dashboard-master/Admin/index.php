@@ -109,9 +109,30 @@
                 <hr>
                 <div class="text-center">
                   <medium>Don't have an account ?</medium>
-                  <medium><a href="register_1.php">Click to Regsiter</a></medium>
+                  <medium><a href data-toggle="modal" data-target="#Modal">Click to Regsiter</a></medium>
                 </div>
               </form>
+            </div>
+          </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Select Login Type</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body text-center">
+                  <a href="cloudKitchen_1.php" class="btn btn-primary">Register as Cloud Kitechen</a>
+                  <a href="register_1.php" class="btn btn-primary">Register as a Shop</a>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
             </div>
           </div>
           <!-- <div class="row mt-3">

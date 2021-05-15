@@ -16,7 +16,7 @@
           session_start();
           $_SESSION['Email'] = $adminEmail;
           $_SESSION['Role'] = $dbResult['roleId'];
-          $_SESSION['ID'] = $dbResult['userId'];
+          $_SESSION['ID'] = $dbResult['AD_ID'];
           echo '<script>window.location.replace("dashboard.php");</script>';
         } else {
           echo '<script>alert("You access has been Revoked!!");window.location.replace("dashboard.php");</script>';

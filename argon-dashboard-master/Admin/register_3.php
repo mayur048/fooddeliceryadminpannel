@@ -4,7 +4,7 @@
    $sessionEmail = $_SESSION['Email'];
    $dbQuery = mysqli_query($db,"SELECT `userId` FROM `shop` WHERE `userId` IN (SELECT `AD_ID` FROM `admindetails` WHERE `AD_Email`='$sessionEmail')");  
    if (mysqli_num_rows($dbQuery) == 0) {
-    echo "<script>alert('No Shope');  </script>";
+    echo "<script>alert('No Shop');  </script>";
   } else {
     $row = mysqli_fetch_array($dbQuery);
     $id = $row['userId'];
@@ -108,7 +108,8 @@
             unset($_SESSION['Email']);
             unset($_SESSION['contact']);
             session_destroy();
-            echo '<script>window.location="register_3.php";</script>';
+            echo '<script>alert("Shop Registered Successfully");</script>';
+            echo '<script>window.location="index.php";</script>';
           }else {
             echo 'sssssssssssssssss1';
           }
